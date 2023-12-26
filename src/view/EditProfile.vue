@@ -124,7 +124,7 @@ const handleSave = async (event) => {
       </div>
     </div>
     <button
-      class="block mx-auto py-2 px-8 outline-none text-white my-4 rounded bg-orange-600"
+      class="block mx-auto py-2 px-8 outline-none text-white my-4 rounded bg-orange-500"
       @click="handleSave"
     >
       Lưu
