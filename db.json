@@ -51,17 +51,24 @@
       "email": "anhtrung@gmail.com",
       "password": "$2a$10$xcAHEv5sEFWTiwS/sUyzm.Jin45FPKNeGZNuatXvkLsKqWPdIQNiu",
       "name": "Hoang Trung",
-      "id": 1
+      "id": 1,
+      "gender": "1",
+      "birthDay": "1999-02-18",
+      "address": "Ha Noi, Phuc Tho",
+      "phone": "0336338991",
+      "image": "/src/assets/hoangtrung.jpg",
+      "description": "Front-end dev"
     },
     {
       "email": "admin@gmail.com",
       "password": "$2a$10$sWQ5Ar8cHzfrzDi5C46XT.QRoPeGdzvfFrQc/6Udz0llIO0BB0xQS",
-      "name": "Hoang Viet Trung",
-      "phone": "033633***",
-      "address": "Ha Noi city, Viet Nam",
-      "gender": "1",
-      "birthDay": "18/2/99",
-      "description": "Hi, my name is Trung, i'am a junior developer ai IMTA TECH company. Nice to meet you !",
+      "name": "Vũ Ánh Quỳnh",
+      "phone": "0123456789",
+      "address": "Nam Định",
+      "gender": "2",
+      "birthDay": "2002-04-21",
+      "description": "Hi, my name is Quynh, i'm  girl friend of a junior developer ai IMTA TECH company. Nice to meet you !",
+      "image": "/src/assets/vuquynh.jpg",
       "id": 2
     },
     {

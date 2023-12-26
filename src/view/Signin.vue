@@ -7,7 +7,7 @@ import { RouterLink, useRouter } from "vue-router";
 const router = useRouter();
 
 const user = reactive({
-  email: "admin@gmail.com",
+  email: "anhtrung@gmail.com",
   password: "anhtrung",
 });
 

@@ -19,3 +19,15 @@ export const signin = async (user) => {
   const res = await instance.post("http://localhost:3000/signin", user);
   return res;
 };
+
+export const updateUser = async (user) => {
+  try {
+    const res = await instance.patch(
+      `http://localhost:3000/users/${user.id}`,
+      user
+    );
+    return res;
+  } catch (error) {
+    console.log("UPDATE_ERROR", error);
+  }
+};
