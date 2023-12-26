@@ -1,0 +1,74 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "HAVIT HV-G92 Gamepad",
+      "oldPrice": 160,
+      "newPrice": 120,
+      "star": 4,
+      "soldQuantity": 88,
+      "image": "https://picsum.photos/270/250"
+    },
+    {
+      "id": 2,
+      "name": "AK-900 Wired Keyboard",
+      "oldPrice": 1160,
+      "newPrice": 960,
+      "star": 5,
+      "soldQuantity": 75,
+      "image": "https://picsum.photos/270/250"
+    },
+    {
+      "id": 3,
+      "name": "IPS LCD Gaming Monitor",
+      "oldPrice": 400,
+      "newPrice": 370,
+      "star": 4,
+      "soldQuantity": 99,
+      "image": "https://picsum.photos/270/250"
+    },
+    {
+      "id": 4,
+      "name": "S-Series Comfort Chair",
+      "oldPrice": 400,
+      "newPrice": 375,
+      "star": 3,
+      "soldQuantity": 88,
+      "image": "https://picsum.photos/270/250"
+    },
+    {
+      "id": 5,
+      "name": "S-Series Comfort Chair 1",
+      "oldPrice": 333,
+      "newPrice": 300,
+      "star": 2,
+      "soldQuantity": 28,
+      "image": "https://picsum.photos/270/250"
+    }
+  ],
+  "users": [
+    {
+      "email": "anhtrung@gmail.com",
+      "password": "$2a$10$xcAHEv5sEFWTiwS/sUyzm.Jin45FPKNeGZNuatXvkLsKqWPdIQNiu",
+      "name": "Hoang Trung",
+      "id": 1
+    },
+    {
+      "email": "admin@gmail.com",
+      "password": "$2a$10$sWQ5Ar8cHzfrzDi5C46XT.QRoPeGdzvfFrQc/6Udz0llIO0BB0xQS",
+      "name": "Hoang Viet Trung",
+      "phone": "033633***",
+      "address": "Ha Noi city, Viet Nam",
+      "gender": "1",
+      "birthDay": "18/2/99",
+      "description": "Hi, my name is Trung, i'am a junior developer ai IMTA TECH company. Nice to meet you !",
+      "id": 2
+    },
+    {
+      "email": "manh@gmail.com",
+      "password": "$2a$10$TtG8HErdyHu7e2qPv6tb4Ofsbcbx0ViNstYuhXNY4s4sNZG3mgRYG",
+      "name": "Manh",
+      "id": 3
+    }
+  ]
+}
