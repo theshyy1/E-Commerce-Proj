@@ -3,6 +3,8 @@ import { storeToRefs } from "pinia";
 import { useAuthStore } from "../store/auth";
 import { reactive } from "vue";
 import { RouterLink, useRouter } from "vue-router";
+import { toast } from "vue3-toastify";
+import "vue3-toastify/dist/index.css";
 
 const router = useRouter();
 
@@ -17,7 +19,12 @@ const handleLogin = async () => {
   try {
     const res = await login(user);
     if (res.accessToken) {
-      router.push({ path: "/", replace: true });
+      toast.success("Đăng nhập thành công !", {
+        autoClose: 2000,
+        position: "top-center",
+        theme: "colored",
+      });
+      router.push({ path: "/" });
     }
   } catch (error) {
     console.log(error.message);
@@ -52,7 +59,7 @@ const handleLogin = async () => {
         </p>
         <p class="my-4 text-red-600">Forget password</p>
         <button
-          class="w-full bg-orange-700 rounded text-white py-4 my-4 hover:opacity-40"
+          class="w-full bg-orange-500 rounded text-white py-4 my-4 hover:opacity-40"
         >
           Login
         </button>

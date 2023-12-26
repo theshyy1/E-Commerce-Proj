@@ -40,6 +40,16 @@ const routes = [
     name: "Signin",
     component: () => import("../view/Signin.vue"),
   },
+  {
+    path: "/wishlist",
+    name: "Wishlist",
+    component: () => import("../view/Wishlist.vue"),
+  },
+  {
+    path: "/cart",
+    name: "Cart",
+    component: () => import("../view/Cart.vue"),
+  },
 ];
 
 const router = createRouter({

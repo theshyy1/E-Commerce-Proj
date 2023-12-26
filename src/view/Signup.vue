@@ -3,6 +3,8 @@ import { RouterLink } from "vue-router";
 import { register } from "../services/http";
 import { reactive } from "vue";
 import { useRouter } from "vue-router";
+import { toast } from "vue3-toastify";
+import "vue3-toastify/dist/index.css";
 
 const router = useRouter();
 
@@ -20,13 +22,13 @@ const handleLogin = async () => {
 
   try {
     await register(userLogin);
-    // (Optional) Đăng nhập tự động sau khi đăng ký thành công
-    // await login(userLogin);
-
-    alert("Registration successful! Please log in.");
+    toast.success("Đăng ký thành công, Đăng nhập ngay !!", {
+      autoClose: 2000,
+      theme: "colored",
+    });
     router.push({ path: "/signin" });
   } catch (error) {
-    console.error("Registration error:", error);
+    console.error("Có lỗi xảy ra !!", error);
     alert("Có lỗi xảy ra !!");
   }
 };
@@ -59,7 +61,7 @@ const handleLogin = async () => {
           class="block w-full outline-none border-b-[1px] border-neutral-400 py-3"
         />
         <button
-          class="w-full bg-orange-700 rounded text-white py-4 my-4 hover:opacity-40"
+          class="w-full bg-orange-500 rounded text-white py-4 my-4 hover:opacity-40"
         >
           Create Account
         </button>
