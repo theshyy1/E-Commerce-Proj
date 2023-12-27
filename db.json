@@ -58,25 +58,8 @@
       "phone": "123456789",
       "image": "/src/assets/hoangtrung.jpg",
       "description": "Front-end dev junior",
-      "careItems": [
-        {
-          "id": 3,
-          "name": "IPS LCD Gaming Monitor",
-          "oldPrice": 400,
-          "newPrice": 370,
-          "star": 4,
-          "soldQuantity": 99,
-          "image": "https://picsum.photos/270/250"
-        },
-        {
-          "id": 1,
-          "name": "HAVIT HV-G92 Gamepad",
-          "oldPrice": 160,
-          "newPrice": 120,
-          "star": 4,
-          "soldQuantity": 88,
-          "image": "https://picsum.photos/270/250"
-        },
+      "careItems": [],
+      "cart": [
         {
           "id": 5,
           "name": "S-Series Comfort Chair 1",
@@ -84,36 +67,6 @@
           "newPrice": 300,
           "star": 2,
           "soldQuantity": 28,
-          "image": "https://picsum.photos/270/250"
-        },
-        {
-          "id": 4,
-          "name": "S-Series Comfort Chair",
-          "oldPrice": 400,
-          "newPrice": 375,
-          "star": 3,
-          "soldQuantity": 88,
-          "image": "https://picsum.photos/270/250"
-        }
-      ],
-      "cart": [
-        {
-          "id": 3,
-          "name": "IPS LCD Gaming Monitor",
-          "oldPrice": 400,
-          "newPrice": 370,
-          "star": 4,
-          "soldQuantity": 99,
-          "image": "https://picsum.photos/270/250",
-          "quantity": 4
-        },
-        {
-          "id": 2,
-          "name": "AK-900 Wired Keyboard",
-          "oldPrice": 1160,
-          "newPrice": 960,
-          "star": 5,
-          "soldQuantity": 75,
           "image": "https://picsum.photos/270/250",
           "quantity": 3
         },
@@ -128,12 +81,22 @@
           "quantity": 1
         },
         {
-          "id": 5,
-          "name": "S-Series Comfort Chair 1",
-          "oldPrice": 333,
-          "newPrice": 300,
-          "star": 2,
-          "soldQuantity": 28,
+          "id": 2,
+          "name": "AK-900 Wired Keyboard",
+          "oldPrice": 1160,
+          "newPrice": 960,
+          "star": 5,
+          "soldQuantity": 75,
+          "image": "https://picsum.photos/270/250",
+          "quantity": 1
+        },
+        {
+          "id": 3,
+          "name": "IPS LCD Gaming Monitor",
+          "oldPrice": 400,
+          "newPrice": 370,
+          "star": 4,
+          "soldQuantity": 99,
           "image": "https://picsum.photos/270/250",
           "quantity": 1
         },

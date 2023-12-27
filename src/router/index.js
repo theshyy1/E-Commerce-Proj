@@ -1,9 +1,4 @@
 import { createWebHistory, createRouter } from "vue-router";
-import HomePage from "../view/HomePage.vue";
-import About from "../view/About.vue";
-import Signin from "../view/Signin.vue";
-import Signup from "../view/Signup.vue";
-
 import { useAuthStore } from "../store/auth";
 
 const routes = [
@@ -24,7 +19,13 @@ const routes = [
   },
   {
     path: "/products",
+    name: "Products",
     component: () => import("../view/HomePage.vue"),
+  },
+  {
+    path: "/products/:id",
+    name: "Product Detail",
+    component: () => import("../view/DetailPage.vue"),
   },
   {
     path: "/about",
@@ -49,6 +50,11 @@ const routes = [
     path: "/cart",
     name: "Cart",
     component: () => import("../view/Cart.vue"),
+  },
+  {
+    path: "/checkout",
+    name: "Check out",
+    component: () => import("../view/Checkout.vue"),
   },
 ];
 

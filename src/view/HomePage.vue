@@ -6,6 +6,7 @@ import { useAuthStore } from "../store/auth";
 import { updateUser } from "../services/http";
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
+import { RouterLink } from "vue-router";
 
 const store = useProductStore();
 const {
@@ -206,7 +207,9 @@ const show = reactive({
       <template v-else>
         <article v-for="product in products" :key="product.id">
           <div class="relative mb-4">
-            <img :src="product.image" alt="" />
+            <RouterLink :to="`/products/${product.id}`">
+              <img :src="product.image" alt="" />
+            </RouterLink>
             <p
               class="flex justify-center items-center absolute top-4 right-[50px] w-[36px] h-[36px] bg-white rounded-full hover:opacity-70 cursor-pointer"
             >
@@ -223,7 +226,9 @@ const show = reactive({
             </p>
           </div>
           <div class="">
-            <h5 class="text-base">{{ product.name }}</h5>
+            <RouterLink :to="`/products/${product.id}`">
+              <h5 class="text-base hover:underline">{{ product.name }}</h5>
+            </RouterLink>
             <p class="text-red-600 mr-2 my-2">
               ${{ product.newPrice }}
               <span class="text-neutral-400 line-through"

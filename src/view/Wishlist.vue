@@ -9,17 +9,6 @@ const {
   loginUser: { user },
 } = useAuthStore();
 
-const handleDelete = async (product) => {
-  const index = user.careItems.findIndex((item) => item.id === product.id);
-  if (index !== -1) {
-    user.careItems.splice(index, 1);
-    await updateUser(user);
-    toast.error("Removed x1", {
-      autoClose: 2000,
-      theme: "colored",
-    });
-  }
-};
 const moveAllToBag = async () => {
   const allItemsCare = [
     ...user.cart,
@@ -30,12 +19,17 @@ const moveAllToBag = async () => {
     allItemsCare.find((obj) => obj.id === id)
   );
 
+  const confirm = window.confirm(
+    "Bạn có chắc chắn muốn thêm tất vào giỏ hàng không?"
+  );
+  if (!confirm) return;
   user.cart = myLastItems;
   user.careItems = [];
 
   await updateUser(user);
   toast.success("Moved all to bag", {
-    autoClose: 2000,
+    autoClose: 1500,
+    position: "bottom-right",
     theme: "colored",
   });
 };
@@ -50,8 +44,22 @@ const addToCart = async (product) => {
 
   const res = await updateUser(user);
   if (res) {
-    toast.success("Added item x1", {
-      autoClose: 2000,
+    toast.success("Added x1", {
+      autoClose: 1500,
+      position: "bottom-right",
+      theme: "colored",
+    });
+  }
+};
+
+const handleDelete = async (product) => {
+  const index = user.careItems.findIndex((item) => item.id === product.id);
+  if (index !== -1) {
+    user.careItems.splice(index, 1);
+    await updateUser(user);
+    toast.error("Removed x1", {
+      autoClose: 1500,
+      position: "bottom-right",
       theme: "colored",
     });
   }
@@ -74,7 +82,9 @@ const addToCart = async (product) => {
     <div class="grid grid-cols-4 gap-4 my-[60px]">
       <article v-for="product in user.careItems" :key="product.id">
         <div class="mb-4 relative">
-          <img :src="product.image" alt="" class="rounded" />
+          <RouterLink :to="`/products/${product.id}`">
+            <img :src="product.image" alt="" class="rounded" />
+          </RouterLink>
           <p
             class="flex justify-center items-center absolute top-4 right-[50px] w-[30px] h-[30px] bg-white rounded-full hover:opacity-70 cursor-pointer"
             @click="handleDelete(product)"
@@ -88,7 +98,9 @@ const addToCart = async (product) => {
           >
         </div>
         <div class="pt-5">
-          <h5 class="text-base">{{ product.name }}</h5>
+          <RouterLink :to="`/products/${product.id}`">
+            <h5 class="text-base hover:underline">{{ product.name }}</h5>
+          </RouterLink>
           <p class="text-red-600 mr-2 my-2">
             $ {{ product.newPrice }}
             <span class="text-neutral-400 line-through"

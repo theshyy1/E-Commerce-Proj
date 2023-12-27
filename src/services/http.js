@@ -11,13 +11,21 @@ export const getProducts = async (page, limit) => {
 };
 
 export const register = async (user) => {
-  const res = await instance.post("http://localhost:3000/register", user);
-  return res;
+  try {
+    const res = await instance.post("http://localhost:3000/register", user);
+    return res;
+  } catch (error) {
+    console.log("SIGNUP_ERROR", error);
+  }
 };
 
 export const signin = async (user) => {
-  const res = await instance.post("http://localhost:3000/signin", user);
-  return res;
+  try {
+    const res = await instance.post("http://localhost:3000/signin", user);
+    return res;
+  } catch (error) {
+    console.log("SIGNIN_ERROR", error);
+  }
 };
 
 export const updateUser = async (user) => {
@@ -29,5 +37,14 @@ export const updateUser = async (user) => {
     return res;
   } catch (error) {
     console.log("UPDATE_ERROR", error);
+  }
+};
+
+export const getProduct = async (id) => {
+  try {
+    const res = await instance.get(`http://localhost:3000/products/${id}`);
+    return res.data;
+  } catch (error) {
+    console.log("GET_ERROR", error);
   }
 };
