@@ -4,6 +4,7 @@ import { useAuthStore } from "../store/auth";
 import { updateUser } from "../services/http";
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
+import { RouterLink } from "vue-router";
 
 const {
   loginUser: { user },
@@ -17,27 +18,25 @@ const totalPriceItems = computed(() => {
   return total;
 });
 
-const handleCheckout = async () => {
-  user.cart = [];
-  await updateUser(user);
-  toast.success("Checkout successfully", {
-    autoClose: 2000,
-    theme: "colored",
-  });
-};
-
 const handleIncrease = async (product) => {
   const index = user.cart.findIndex((item) => item.id == product.id);
 
   if (user.cart[index].quantity > 1) {
     user.cart[index].quantity--;
   } else {
-    const confirm = window.confirm("Are you sure you want to remove");
+    const confirm = window.confirm(
+      "Are you sure you want to remove this item?"
+    );
     if (confirm) {
       user.cart.splice(index, 1);
     }
   }
   await updateUser(user);
+  toast.error("Removed an item", {
+    autoClose: 1500,
+    position: "bottom-right",
+    theme: "colored",
+  });
 };
 
 const handleDecrease = async (product) => {
@@ -49,9 +48,8 @@ const handleDecrease = async (product) => {
 const removeItem = async (product) => {
   const index = user.cart.findIndex((item) => item.id == product.id);
   const confirm = window.confirm("Are you sure you want to remove");
-  if (confirm) {
-    user.cart.splice(index, 1);
-  }
+  if (!confirm) return;
+  user.cart.splice(index, 1);
   await updateUser(user);
 };
 </script>
@@ -145,13 +143,14 @@ const removeItem = async (product) => {
               Total: <span class="totalPrice">$ {{ totalPriceItems }}</span>
             </p>
           </div>
-          <button
-            class="w-[260px] py-4 ml-4 bg-orange-500 border-none text-white rounded hover:opacity-60"
-            id="checkout-done"
-            @click="handleCheckout"
-          >
-            Procees to checkout
-          </button>
+          <RouterLink to="/checkout">
+            <button
+              class="w-[260px] py-4 ml-4 bg-orange-500 border-none text-white rounded hover:opacity-60"
+              id="checkout-done"
+            >
+              Procees to checkout
+            </button>
+          </RouterLink>
         </div>
       </div>
     </div>

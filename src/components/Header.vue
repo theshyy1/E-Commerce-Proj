@@ -49,7 +49,7 @@ const handleLogout = () => {
             <RouterLink to="/about" class="hover:underline">About</RouterLink>
           </li>
           <li>
-            <RouterLink to="/collections" class="hover:underline"
+            <RouterLink to="/checkout" class="hover:underline"
               >Collections</RouterLink
             >
           </li>
