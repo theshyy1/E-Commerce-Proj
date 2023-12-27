@@ -1,11 +1,42 @@
 <script setup>
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { useAuthStore } from "../store/auth";
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
 import { updateUser } from "../services/http";
 
 const { loginUser } = useAuthStore();
+
+// Discount price
+const codeDiscount = ref("");
+const shipPrice = ref(loginUser.user.cart.length * 20);
+const payFee = ref(shipPrice.value);
+
+const getDiscount = computed(() => {
+  let discount = 0;
+  switch (codeDiscount.value) {
+    case "hoangtrung":
+      discount = 1;
+      break;
+    case "trung":
+      discount = 0.5;
+      break;
+    case "manh":
+      discount = 0.4;
+      break;
+    case "quynh":
+      discount = 0.3;
+      break;
+    default:
+      discount = 0;
+  }
+  return shipPrice.value * discount;
+});
+
+function getPriceDiscount() {
+  const x = computed(() => shipPrice.value - getDiscount.value);
+  payFee.value = x.value;
+}
 
 const totalPriceItems = computed(() => {
   const total = loginUser.user.cart.reduce(
@@ -120,12 +151,13 @@ const handleCheckout = async () => {
             <p
               class="flex justify-between border-b-[1px] border-neutral-300 py-1 px-2 mb-4"
             >
-              Shipping: <span>Free</span>
+              Shipping: <span>{{ payFee === 0 ? "Free" : `$ ${payFee}` }}</span>
             </p>
             <p
               class="flex justify-between border-b-[1px] border-neutral-300 py-1 px-2 mb-4"
             >
-              Total: <span class="totalPrice">$ {{ totalPriceItems }}</span>
+              Total:
+              <span class="totalPrice">$ {{ totalPriceItems + payFee }}</span>
             </p>
           </div>
           <div class="">
@@ -150,18 +182,20 @@ const handleCheckout = async () => {
               class="text-3xl"
             /><span class="ml-2">Cash on delivery</span>
           </div>
-          <form class="flex justify-center mt-8">
+          <div class="flex justify-center mt-8">
             <input
               type="text"
               placeholder="Coupon Code"
               class="w-[300px] text-sm text-black py-4 px-5 border-[1px] border-neutral-300 rounded"
+              v-model="codeDiscount"
+              @keyup.enter="getPriceDiscount"
             />
             <button
               class="w-[210px] py-4 ml-4 bg-orange-500 border-none text-white rounded hover:opacity-60"
             >
               Apply Coupon
             </button>
-          </form>
+          </div>
         </div>
         <button
           class="w-[210px] py-4 ml-6 bg-orange-500 border-none text-white rounded hover:opacity-60"

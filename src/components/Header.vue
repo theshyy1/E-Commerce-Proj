@@ -36,7 +36,9 @@ const handleLogout = () => {
   </header>
   <section class="border-b-[1px] bg-orange-500 text-white border-neutral-500">
     <div class="container flex justify-between items-center pt-9 mb-4">
-      <h3 class="text-2xl font-bold">Exclusive</h3>
+      <RouterLink to="/">
+        <h3 class="text-2xl font-bold">Exclusive</h3>
+      </RouterLink>
       <nav>
         <ul class="flex justify-center items-center space-x-6">
           <li><RouterLink to="/" class="hover:underline">Home</RouterLink></li>
@@ -91,7 +93,7 @@ const handleLogout = () => {
             >
               <ul
                 v-if="loginUser.user?.cart.length > 0"
-                class="space-y-2 h-full py-2 mb-2"
+                class="space-y-2 h-full py-2 my-4"
               >
                 <li
                   v-for="item in loginUser.user.cart"

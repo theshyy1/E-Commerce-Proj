@@ -13,7 +13,6 @@ const {
   loginUser: { user },
 } = useAuthStore();
 const { products, isLoading } = storeToRefs(store);
-const click = ref(false);
 
 const handleClick = async (product) => {
   const index = user.careItems.findIndex((item) => item.id === product.id);
@@ -23,7 +22,8 @@ const handleClick = async (product) => {
 
   await updateUser(user);
   toast.success("Added x1", {
-    autoClose: 2000,
+    autoClose: 1500,
+    position: "bottom-right",
     theme: "colored",
   });
 };
@@ -36,7 +36,8 @@ const removeClick = async (product) => {
 
   await updateUser(user);
   toast.error("Removed x1", {
-    autoClose: 2000,
+    autoClose: 1500,
+    position: "bottom-right",
     theme: "colored",
   });
 };
@@ -149,8 +150,8 @@ const show = reactive({
   <section class="container my-[60px]">
     <div class="mb-[40px]">
       <section class="flex items-center mb-6">
-        <span class="block w-5 h-[40px] rounded-md bg-red-700 mr-2"></span>
-        <p class="text-red-700">Today’s</p>
+        <span class="block w-5 h-[40px] rounded-md bg-orange-500 mr-2"></span>
+        <p class="text-orange-700">Today’s</p>
       </section>
       <section class="flex justify-between items-center">
         <h4 class="text-4xl font-semibold">Flash Sales</h4>
@@ -214,7 +215,7 @@ const show = reactive({
               class="flex justify-center items-center absolute top-4 right-[50px] w-[36px] h-[36px] bg-white rounded-full hover:opacity-70 cursor-pointer"
             >
               <i
-                class="fa-solid fa-heart text-2xl text-red-500"
+                class="fa-solid fa-heart text-2xl text-orange-500"
                 @click="removeClick(product)"
                 v-if="checkItem(product)"
               ></i>
@@ -252,7 +253,7 @@ const show = reactive({
     </div>
     <div class="">
       <button
-        class="block mx-auto mt-[60px] w-[234px] bg-red-600 text-white rounded py-4 hover:opacity-40"
+        class="block mx-auto mt-[60px] w-[234px] bg-orange-500 text-white rounded py-4 hover:opacity-40"
       >
         View All Products
       </button>
