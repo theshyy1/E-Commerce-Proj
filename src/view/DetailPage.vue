@@ -11,6 +11,19 @@ onMounted(() => {
   }
   getProductDetail();
 });
+
+const quantity = ref(1);
+
+function increaseSL() {
+  quantity.value = quantity.value + 1;
+}
+
+function decreaseSL() {
+  if (quantity.value <= 0) {
+    return;
+  }
+  quantity.value = quantity.value - 1;
+}
 </script>
 
 <template>
@@ -47,7 +60,7 @@ onMounted(() => {
           <span class="text-green-700">In Stock</span>
         </ul>
         <span class="block text-2xl font-semibold mb-6"
-          >${{ currentProduct?.newPrice }}</span
+          >${{ currentProduct?.newPrice * quantity }}</span
         >
         <p class="text-sm max-w-[440px] pb-6 border-b-[1px] border-black">
           PlayStation 5 Controller Skin High quality vinyl with air channel
@@ -85,9 +98,9 @@ onMounted(() => {
           <div
             class="border-[1px] border-black rounded w-[100px] flex justify-around p-1"
           >
-            <span> - </span>
-            <span> 2 </span>
-            <span> + </span>
+            <span class="block px-3" @click="decreaseSL"> - </span>
+            <span> {{ quantity || 1 }} </span>
+            <span class="block px-3" @click="increaseSL"> + </span>
           </div>
           <button
             class="bg-orange-500 text-white py-2 px-7 rounded hover:opacity-60"
