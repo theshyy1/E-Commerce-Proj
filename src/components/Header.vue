@@ -52,7 +52,7 @@ const handleLogout = () => {
           </li>
           <li>
             <RouterLink to="/checkout" class="hover:underline"
-              >Collections</RouterLink
+              >Checkout</RouterLink
             >
           </li>
         </ul>
@@ -81,7 +81,7 @@ const handleLogout = () => {
               >Wishlist</span
             >
             <span
-              v-if="loginUser.user?.careItems.length > 0"
+              v-if="loginUser.user?.careItems?.length > 0"
               class="flex justify-center absolute top-[-7px] right-[-10px] text-sm w-5 h-5 rounded-full bg-orange-800 text-white"
               >{{ loginUser.user?.careItems.length }}</span
             >
@@ -92,7 +92,7 @@ const handleLogout = () => {
               class="hidden group-hover:flex w-[300px] h-[230px] bg-white text-black absolute top-[30px] right-0 z-[2] justify-center items-center text-base shadow-md border-[1px] border-neutral-300 overflow-y-auto"
             >
               <ul
-                v-if="loginUser.user?.cart.length > 0"
+                v-if="loginUser.user?.cart?.length > 0"
                 class="space-y-2 h-full py-2 my-4"
               >
                 <li

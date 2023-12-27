@@ -209,7 +209,11 @@ const show = reactive({
         <article v-for="product in products" :key="product.id">
           <div class="relative mb-4">
             <RouterLink :to="`/products/${product.id}`">
-              <img :src="product.image" alt="" />
+              <img
+                :src="product.image"
+                :alt="product.name"
+                class="object-cover"
+              />
             </RouterLink>
             <p
               class="flex justify-center items-center absolute top-4 right-[50px] w-[36px] h-[36px] bg-white rounded-full hover:opacity-70 cursor-pointer"

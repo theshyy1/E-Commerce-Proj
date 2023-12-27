@@ -7,7 +7,8 @@
       "newPrice": 120,
       "star": 4,
       "soldQuantity": 88,
-      "image": "https://picsum.photos/270/250"
+      "image": "https://picsum.photos/271/250",
+      "quantityInStock": 50
     },
     {
       "id": 2,
@@ -16,7 +17,8 @@
       "newPrice": 960,
       "star": 5,
       "soldQuantity": 75,
-      "image": "https://picsum.photos/270/250"
+      "image": "https://picsum.photos/272/250",
+      "quantityInStock": 50
     },
     {
       "id": 3,
@@ -25,7 +27,8 @@
       "newPrice": 370,
       "star": 4,
       "soldQuantity": 99,
-      "image": "https://picsum.photos/270/250"
+      "image": "https://picsum.photos/273/250",
+      "quantityInStock": 30
     },
     {
       "id": 4,
@@ -34,7 +37,8 @@
       "newPrice": 375,
       "star": 3,
       "soldQuantity": 88,
-      "image": "https://picsum.photos/270/250"
+      "image": "https://picsum.photos/274/250",
+      "quantityInStock": 58
     },
     {
       "id": 5,
@@ -43,7 +47,8 @@
       "newPrice": 300,
       "star": 2,
       "soldQuantity": 28,
-      "image": "https://picsum.photos/270/250"
+      "image": "https://picsum.photos/275/250",
+      "quantityInStock": 47
     }
   ],
   "users": [
@@ -59,6 +64,7 @@
       "image": "/src/assets/hoangtrung.jpg",
       "description": "Front-end dev junior",
       "careItems": [],
+      "role": "1",
       "cart": [
         {
           "id": 2,
@@ -67,16 +73,6 @@
           "newPrice": 960,
           "star": 5,
           "soldQuantity": 75,
-          "image": "https://picsum.photos/270/250",
-          "quantity": 1
-        },
-        {
-          "id": 4,
-          "name": "S-Series Comfort Chair",
-          "oldPrice": 400,
-          "newPrice": 375,
-          "star": 3,
-          "soldQuantity": 88,
           "image": "https://picsum.photos/270/250",
           "quantity": 1
         },
@@ -112,7 +108,31 @@
       "birthDay": "2002-04-21",
       "description": "Hi, my name is Quynh, i'm  girl friend of a junior developer ai IMTA TECH company. Nice to meet you !",
       "image": "/src/assets/vuquynh.jpg",
-      "id": 2
+      "id": 2,
+      "role": "2",
+      "careItems": [],
+      "cart": [
+        {
+          "id": 3,
+          "name": "IPS LCD Gaming Monitor",
+          "oldPrice": 400,
+          "newPrice": 370,
+          "star": 4,
+          "soldQuantity": 99,
+          "image": "https://picsum.photos/273/250",
+          "quantity": 1
+        },
+        {
+          "id": 2,
+          "name": "AK-900 Wired Keyboard",
+          "oldPrice": 1160,
+          "newPrice": 960,
+          "star": 5,
+          "soldQuantity": 75,
+          "image": "https://picsum.photos/272/250",
+          "quantity": 1
+        }
+      ]
     },
     {
       "email": "manh@gmail.com",

@@ -51,31 +51,42 @@ const totalPriceItems = computed(() => {
 });
 
 // Handle quantity
-const handleIncrease = async (product) => {
+const handleDecrease = async (product) => {
   const index = user.cart.findIndex((item) => item.id == product.id);
 
   if (user.cart[index].quantity > 1) {
     user.cart[index].quantity--;
+    await updateUser(user);
+    toast.error("-1 item", {
+      autoClose: 1500,
+      position: "bottom-right",
+      theme: "colored",
+    });
   } else {
     const confirm = window.confirm(
       "Are you sure you want to remove this item?"
     );
     if (confirm) {
       user.cart.splice(index, 1);
+      await updateUser(user);
+      toast.error("Removed -1", {
+        autoClose: 1500,
+        position: "bottom-right",
+        theme: "colored",
+      });
     }
   }
+};
+
+const handleIncrease = async (product) => {
+  const index = user.cart.findIndex((item) => item.id == product.id);
+  user.cart[index].quantity++;
   await updateUser(user);
-  toast.error("Removed an item", {
+  toast.success("Added +1", {
     autoClose: 1500,
     position: "bottom-right",
     theme: "colored",
   });
-};
-
-const handleDecrease = async (product) => {
-  const index = user.cart.findIndex((item) => item.id == product.id);
-  user.cart[index].quantity++;
-  await updateUser(user);
 };
 
 const removeItem = async (product) => {
@@ -124,11 +135,11 @@ const removeItem = async (product) => {
             <div class="flex flex-col ml-1 items-center justify-start">
               <i
                 class="fa-solid fa-chevron-up cursor-pointer"
-                @click="handleDecrease(cart)"
+                @click="handleIncrease(cart)"
               ></i>
               <i
                 class="fa-solid fa-chevron-down cursor-pointer"
-                @click="handleIncrease(cart)"
+                @click="handleDecrease(cart)"
               ></i>
             </div>
           </div>

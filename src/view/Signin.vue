@@ -17,14 +17,16 @@ const user = reactive({
 const handleLogin = async () => {
   try {
     const res = await login(user);
-    if (res.accessToken) {
-      toast.success("Đăng nhập thành công !", {
-        autoClose: 2000,
-        position: "top-center",
-        theme: "colored",
-      });
+    if (res.user.role === "1") {
+      router.push({ path: "/admin" });
+    } else {
       router.push({ path: "/" });
     }
+    toast.success("Đăng nhập thành công !", {
+      autoClose: 2000,
+      position: "top-center",
+      theme: "colored",
+    });
   } catch (error) {
     console.log(error.message);
   }
