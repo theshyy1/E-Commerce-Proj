@@ -1,6 +1,5 @@
 <script setup>
 import { ref } from "vue";
-import { useProductStore } from "../store";
 import { useAuthStore } from "../store/auth";
 import { updateUser } from "../services/http";
 import { toast } from "vue3-toastify";
@@ -15,7 +14,7 @@ const handleDelete = async (product) => {
   if (index !== -1) {
     user.careItems.splice(index, 1);
     await updateUser(user);
-    toast.error("Removed item x1", {
+    toast.error("Removed x1", {
       autoClose: 2000,
       theme: "colored",
     });
@@ -62,10 +61,12 @@ const addToCart = async (product) => {
 <template>
   <div class="container">
     <div class="flex justify-between items-center mt-[80px]">
-      <span class="text-xl">Wishlist ({{ user.careItems.length }})</span>
+      <h1 class="my-5 text-3xl border-l-4 border-orange-500 px-3 ml-6">
+        Wishlist ({{ user.careItems.length }})
+      </h1>
       <button
         @click="moveAllToBag"
-        class="border-[1px] border-black py-3 px-7 rounded"
+        class="border-[1px] border-black py-3 px-7 rounded hover:bg-orange-400"
       >
         Move All To Bag
       </button>
@@ -78,7 +79,7 @@ const addToCart = async (product) => {
             class="flex justify-center items-center absolute top-4 right-[50px] w-[30px] h-[30px] bg-white rounded-full hover:opacity-70 cursor-pointer"
             @click="handleDelete(product)"
           >
-            <i class="fa-regular fa-circle-xmark text-2xl"></i>
+            <i class="fa-solid fa-trash-can text-xl"></i>
           </p>
           <span
             @click="addToCart(product)"

@@ -23,9 +23,7 @@ const handleSave = async (event) => {
 </script>
 
 <template>
-  <div
-    class="container w-[1000px] h-[800px] bg-neutral-300 rounded shadow-md my-4"
-  >
+  <div class="container h-[800px] bg-neutral-300 shadow-md">
     <div class="flex flex-col justify-center items-center">
       <h1 class="my-7 text-3xl font-bold">Chỉnh sửa thông tin</h1>
       <div class="">
@@ -124,7 +122,7 @@ const handleSave = async (event) => {
       </div>
     </div>
     <button
-      class="block mx-auto py-2 px-8 outline-none text-white my-4 rounded bg-orange-500"
+      class="block mx-auto py-2 px-10 outline-none text-white my-4 rounded bg-orange-500 hover:opacity-60"
       @click="handleSave"
     >
       Lưu

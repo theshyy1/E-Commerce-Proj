@@ -1,13 +1,5 @@
 <script setup>
-import {
-  computed,
-  onBeforeMount,
-  onMounted,
-  ref,
-  toRefs,
-  watch,
-  watchEffect,
-} from "vue";
+import { reactive, ref } from "vue";
 import { useProductStore } from "../store";
 import { storeToRefs } from "pinia";
 import { useAuthStore } from "../store/auth";
@@ -20,6 +12,7 @@ const {
   loginUser: { user },
 } = useAuthStore();
 const { products, isLoading } = storeToRefs(store);
+const click = ref(false);
 
 const handleClick = async (product) => {
   const index = user.careItems.findIndex((item) => item.id === product.id);
@@ -28,10 +21,27 @@ const handleClick = async (product) => {
   }
 
   await updateUser(user);
-  toast.success("Added item x1", {
+  toast.success("Added x1", {
     autoClose: 2000,
     theme: "colored",
   });
+};
+
+const removeClick = async (product) => {
+  const index = user.careItems.findIndex((item) => item.id === product.id);
+  if (index !== -1) {
+    user.careItems.splice(index, 1);
+  }
+
+  await updateUser(user);
+  toast.error("Removed x1", {
+    autoClose: 2000,
+    theme: "colored",
+  });
+};
+
+const checkItem = (product) => {
+  return user.careItems.findIndex((item) => item.id === product.id) !== -1;
 };
 
 let order = "asc";
@@ -59,6 +69,12 @@ const sortyByRate = () => {
   order = order === "asc" ? "desc" : "asc";
   sortAndSetProducts("star");
 };
+
+const show = reactive({
+  name: true,
+  price: true,
+  star: false,
+});
 </script>
 
 <template>
@@ -153,28 +169,35 @@ const sortyByRate = () => {
       class="flex space-x-5 items-center border-[1px] bg-neutral-200 py-2 px-3 my-6"
     >
       <span class="ml-5">Sắp xếp theo</span>
-      <li>
+      <li @click="show.name = !show.name">
         <button
           class="px-5 py-3 bg-white text-black hover:bg-orange-500 hover:text-white"
           @click="sortByName"
+          transition="fade"
         >
-          Tên sản phẩm A-Z
+          Tên sản phẩm
+          <i v-if="show.name" class="fa-solid fa-chevron-up"></i>
+          <i v-else class="fa-solid fa-chevron-down"></i>
         </button>
       </li>
-      <li>
+      <li @click="show.price = !show.price">
         <button
           @click="sortByPrice"
           class="px-5 py-3 bg-white text-black hover:bg-orange-500 hover:text-white"
         >
           Giá sản phẩm
+          <i v-if="show.price" class="fa-solid fa-chevron-up"></i>
+          <i v-else class="fa-solid fa-chevron-down"></i>
         </button>
       </li>
-      <li>
+      <li @click="show.star = !show.star">
         <button
           @click="sortyByRate"
           class="px-5 py-3 bg-white text-black hover:bg-orange-500 hover:text-white"
         >
           Đánh giá
+          <i v-if="show.star" class="fa-solid fa-chevron-up"></i>
+          <i v-else class="fa-solid fa-chevron-down"></i>
         </button>
       </li>
     </ul>
@@ -186,9 +209,17 @@ const sortyByRate = () => {
             <img :src="product.image" alt="" />
             <p
               class="flex justify-center items-center absolute top-4 right-[50px] w-[36px] h-[36px] bg-white rounded-full hover:opacity-70 cursor-pointer"
-              @click="handleClick(product)"
             >
-              <i class="fa-regular fa-heart text-2xl"></i>
+              <i
+                class="fa-solid fa-heart text-2xl text-red-500"
+                @click="removeClick(product)"
+                v-if="checkItem(product)"
+              ></i>
+              <i
+                v-else
+                @click="handleClick(product)"
+                class="fa-regular fa-heart text-2xl"
+              ></i>
             </p>
           </div>
           <div class="">
@@ -223,3 +254,14 @@ const sortyByRate = () => {
     </div>
   </section>
 </template>
+
+<style>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>

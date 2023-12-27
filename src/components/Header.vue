@@ -16,8 +16,6 @@ const handleSubmit = () => {
 const handleLogout = () => {
   logout();
 };
-
-
 </script>
 
 <template>
@@ -81,29 +79,51 @@ const handleLogout = () => {
               >Wishlist</span
             >
             <span
-            v-if="loginUser.user?.careItems.length > 0"
+              v-if="loginUser.user?.careItems.length > 0"
               class="flex justify-center absolute top-[-7px] right-[-10px] text-sm w-5 h-5 rounded-full bg-orange-800 text-white"
               >{{ loginUser.user?.careItems.length }}</span
             >
           </RouterLink>
           <RouterLink to="/cart" class="hover-trigger group relative">
             <i class="fa-solid fa-cart-plus"></i>
-            <p
-              class="hidden group-hover:flex w-[300px] h-[200px] bg-white text-black absolute top-[30px] right-0 z-[2] justify-center items-center text-base shadow-md border-[1px] border-neutral-300 overflow-y-auto"
+            <div
+              class="hidden group-hover:flex w-[300px] h-[230px] bg-white text-black absolute top-[30px] right-0 z-[2] justify-center items-center text-base shadow-md border-[1px] border-neutral-300 overflow-y-auto"
             >
-              <ul v-if="loginUser.user?.cart.length > 0" class="space-y-2 h-full py-2">
-                <li v-for="item in loginUser.user.cart" class="flex justify-between items-center">
-                  <a :href="`/products/${item.id}`" class="flex justify-between items-center">
+              <ul
+                v-if="loginUser.user?.cart.length > 0"
+                class="space-y-2 h-full py-2 mb-2"
+              >
+                <li
+                  v-for="item in loginUser.user.cart"
+                  class="flex justify-between items-center"
+                >
+                  <RouterLink
+                    :to="`/products/${item.id}`"
+                    class="flex justify-between items-center"
+                  >
                     <div class="flex items-center">
-                      <img :src="item.image" class="object-cover w-[40px] h-[40px] mr-1 rounded"  alt="">
+                      <img
+                        :src="item.image"
+                        class="object-cover w-[40px] h-[40px] mr-1 rounded"
+                        alt=""
+                      />
                       <p class="text-sm w-[180px]">{{ item.name }}</p>
                     </div>
-                    <span class="text-red-500 text-sm">${{ item.newPrice }}</span>
-                  </a>
-                  </li>
+                    <span class="text-red-500 text-sm"
+                      >${{ item.newPrice }}</span
+                    >
+                  </RouterLink>
+                </li>
+                <div class="">
+                  <button
+                    class="block ml-auto py-2 px-3 bg-orange-500 text-white hover:opacity-60"
+                  >
+                    View Cart
+                  </button>
+                </div>
               </ul>
               <span v-else>Chưa có sản phẩm</span>
-            </p>
+            </div>
           </RouterLink>
           <span v-if="loginUser.isLoggin" class="hover-trigger group relative">
             <i class="fa-regular fa-user"></i>
@@ -156,7 +176,7 @@ const handleLogout = () => {
           </span>
           <span v-else>
             <RouterLink
-              class="text-xl border-[1px] border-white rounded py-1 px-2"
+              class="text-base border-[1px] border-white rounded py-1 px-2"
               to="/signin"
               >Sign in</RouterLink
             >

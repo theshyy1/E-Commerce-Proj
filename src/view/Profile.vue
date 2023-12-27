@@ -17,15 +17,12 @@ const hidePhoneNumber = computed(() => {
   if (user.phone) {
     newNumber.value = user.phone.slice(0, -4).padEnd(user.phone.length, "*");
   }
-
   return newNumber.value;
 });
 </script>
 
 <template>
-  <div
-    class="container relative w-[1000px] h-[800px] bg-neutral-300 rounded shadow-md my-[30px]"
-  >
+  <div class="container relative h-[800px] bg-neutral-300 shadow-md">
     <div class="flex flex-col justify-center items-center">
       <h1 class="my-7 text-3xl font-bold text-sky-500">Profile Cá Nhân</h1>
       <RouterLink

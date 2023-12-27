@@ -7,13 +7,12 @@ import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
 
 const router = useRouter();
+const { login } = useAuthStore();
 
 const user = reactive({
   email: "anhtrung@gmail.com",
   password: "anhtrung",
 });
-
-const { login } = useAuthStore();
 
 const handleLogin = async () => {
   try {
