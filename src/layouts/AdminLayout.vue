@@ -1,12 +1,7 @@
 <script setup>
 import { RouterLink, RouterView } from "vue-router";
 import Sidebar from "../components/Sidebar.vue";
-import { useRoute } from "vue-router";
 import AdHeader from "../components/AdHeader.vue";
-const route = useRoute();
-function key() {
-  return route.path;
-}
 </script>
 
 <template>
@@ -15,7 +10,7 @@ function key() {
     <div class="">
       <Sidebar />
       <router-view
-        class="float-right bg-[#bbdff0] h-[800px] w-4/5 p-6"
+        class="float-right bg-[#bbdff0] h-[800px] w-5/6 p-6"
         v-slot="{ Component, route }"
       >
         <transition name="fade" mode="out-in">

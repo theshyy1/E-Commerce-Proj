@@ -4,7 +4,6 @@ import { register } from "../services/http";
 import { reactive } from "vue";
 import { useRouter } from "vue-router";
 import { toast } from "vue3-toastify";
-import "vue3-toastify/dist/index.css";
 
 const router = useRouter();
 

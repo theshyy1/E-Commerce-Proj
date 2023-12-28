@@ -1,19 +1,16 @@
 import instance from "./api";
 
-export const getProducts = async (page, limit) => {
-  const res = await instance.get("products", {
-    params: {
-      _page: page,
-      _limit: limit,
-    },
-  });
-  return res;
+export const getProducts = async () => {
+  return await instance.get("/products");
+};
+
+export const getProducts2 = async () => {
+  return await instance.get("/products");
 };
 
 export const register = async (user) => {
   try {
-    const res = await instance.post("http://localhost:3000/register", user);
-    return res;
+    return await instance.post("/register", user);
   } catch (error) {
     console.log("SIGNUP_ERROR", error);
   }
@@ -21,8 +18,7 @@ export const register = async (user) => {
 
 export const signin = async (user) => {
   try {
-    const res = await instance.post("http://localhost:3000/signin", user);
-    return res;
+    return await instance.post("/signin", user);
   } catch (error) {
     console.log("SIGNIN_ERROR", error);
   }
@@ -30,39 +26,40 @@ export const signin = async (user) => {
 
 export const updateUser = async (user) => {
   try {
-    const res = await instance.patch(
-      `http://localhost:3000/users/${user.id}`,
-      user
-    );
-    return res;
+    return await instance.patch(`/users/${user.id}`, user);
   } catch (error) {
-    console.log("UPDATE_ERROR", error);
+    console.log("UPDATE_USER_ERROR", error);
   }
 };
 
 export const getProduct = async (id) => {
   try {
-    const res = await instance.get(`http://localhost:3000/products/${id}`);
-    return res.data;
+    return await instance.get(`/products/${id}`);
   } catch (error) {
-    console.log("GET_ERROR", error);
+    console.log("GET_PRODUCT_ERROR", error);
   }
 };
 
 export const addProduct = async (product) => {
   try {
-    const res = await instance.post("http://localhost:3000/products", product);
-    return res;
+    return await instance.post("/products", product);
   } catch (error) {
-    console.log("ADD_ERROR", error);
+    console.log("ADD_PRODUCT_ERROR", error);
   }
 };
 
-export const deletedProduct = async (id) => {
+export const deleteProduct = async (id) => {
   try {
-    const res = await instance.delete(`http://localhost:3000/products/${id}`);
-    return res;
+    return await instance.delete(`/products/${id}`);
   } catch (error) {
-    console.log("ADD_ERROR", error);
+    console.log("DELETE_PRODUCT_ERROR", error);
+  }
+};
+
+export const getAllUsers = async () => {
+  try {
+    return await instance.get(`/users`);
+  } catch (error) {
+    console.log("GET_USERS_ERROR", error);
   }
 };

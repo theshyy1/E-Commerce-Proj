@@ -2,7 +2,6 @@
 import { computed, ref } from "vue";
 import { useAuthStore } from "../store/auth";
 import { toast } from "vue3-toastify";
-import "vue3-toastify/dist/index.css";
 import { updateUser } from "../services/http";
 
 const { loginUser } = useAuthStore();

@@ -4,13 +4,12 @@ import { useAuthStore } from "../store/auth";
 import { reactive } from "vue";
 import { RouterLink, useRouter } from "vue-router";
 import { toast } from "vue3-toastify";
-import "vue3-toastify/dist/index.css";
 
 const router = useRouter();
 const { login } = useAuthStore();
 
 const user = reactive({
-  email: "anhtrung@gmail.com",
+  email: "admin@gmail.com",
   password: "anhtrung",
 });
 

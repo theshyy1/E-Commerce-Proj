@@ -1,14 +1,13 @@
 import { defineStore } from "pinia";
-import { computed, onMounted, ref } from "vue";
+import { computed, ref } from "vue";
+import { getProducts2, deleteProduct, addProduct } from "../services/http";
 import axios from "axios";
 
 export const useProductStore = defineStore("products", () => {
   const allProducts = ref([]);
   const isLoading = ref(false);
 
-  const products = computed(() => allProducts.value);
-
-  const getProducts = async (text = "") => {
+  const getFilteredProducts = async (text = "") => {
     if (text.trim) {
       isLoading.value = true;
       const res = await axios.get(`http://localhost:3000/products?q=${text}`);
@@ -28,28 +27,35 @@ export const useProductStore = defineStore("products", () => {
     }
   };
 
-  const deleteProduct = async (product) => {
+  const sdeleteProduct = async (id) => {
     try {
-      await axios.delete(`http://localhost:3000/products/${product.id}`);
-      allProducts.value = allProducts.value.splice(
-        allProducts.value.findIndex((item) => item.id === product.id)
-      );
+      await deleteProduct(id);
+      allProducts.value = allProducts.value.filter((item) => item.id !== id);
     } catch (error) {
       console.log("ADD_ERROR", error);
     }
   };
 
-  const addProduct = async (product) => {
+  const saddProduct = async (product) => {
     try {
-      const res = await axios.post("http://localhost:3000/products", product);
+      await addProduct(product);
       allProducts.value.push(product);
-      return res;
     } catch (error) {
       console.log("ADD_ERROR", error);
     }
   };
 
-  getProducts();
+  const getAllProducts = async () => {
+    const res = await getProducts2();
+    allProducts.value = res.data;
+  };
 
-  return { products, isLoading, getProducts, deleteProduct, addProduct };
+  return {
+    allProducts,
+    isLoading,
+    getFilteredProducts,
+    getAllProducts,
+    sdeleteProduct,
+    saddProduct,
+  };
 });

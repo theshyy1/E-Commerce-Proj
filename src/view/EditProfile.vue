@@ -1,8 +1,6 @@
 <!-- UserInfo.vue -->
 <script setup>
-import { storeToRefs } from "pinia";
 import { useAuthStore } from "../store/auth";
-import { computed } from "vue";
 import { updateUser } from "../services/http";
 import { useRouter } from "vue-router";
 
@@ -11,13 +9,13 @@ const {
   loginUser: { user },
 } = useAuthStore();
 
-const birthday = computed(() => user.birthDay.split("/"));
-
 const handleSave = async (event) => {
   event.preventDefault();
   const res = await updateUser(user);
-  if (res) {
+  if (res.role === "1") {
     router.push({ path: "/profile" });
+  } else {
+    router.push({ path: "/admin/profile" });
   }
 };
 </script>

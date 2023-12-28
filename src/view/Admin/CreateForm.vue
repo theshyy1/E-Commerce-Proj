@@ -6,8 +6,7 @@ import "vue3-toastify/dist/index.css";
 import { useProductStore } from "../../store";
 
 const router = useRouter();
-
-const { addProduct } = useProductStore();
+const store = useProductStore();
 
 const newProduct = reactive({
   name: "",
@@ -23,7 +22,7 @@ const handleSubmit = async () => {
     soldQuantity: 0,
     oldPrice: (newProduct.newPrice * 110) / 100,
   };
-  await addProduct(product);
+  await store.saddProduct(product);
   router.push({ path: "/admin/products", replace: true });
   toast.success("Added successfully", {
     autoClose: 1500,

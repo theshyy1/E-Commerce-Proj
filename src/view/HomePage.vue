@@ -1,19 +1,20 @@
 <script setup>
-import { reactive, ref } from "vue";
+import { computed, onMounted, reactive, ref } from "vue";
 import { useProductStore } from "../store";
-import { storeToRefs } from "pinia";
 import { useAuthStore } from "../store/auth";
 import { updateUser } from "../services/http";
 import { toast } from "vue3-toastify";
-import "vue3-toastify/dist/index.css";
 import { RouterLink } from "vue-router";
 
 const store = useProductStore();
 const {
   loginUser: { user },
 } = useAuthStore();
-const { products, isLoading } = storeToRefs(store);
 
+onMounted(() => store.getFilteredProducts());
+const productFilters = computed(() => store.allProducts);
+
+// add to wishlist
 const handleClick = async (product) => {
   const index = user.careItems.findIndex((item) => item.id === product.id);
   if (index === -1) {
@@ -28,6 +29,7 @@ const handleClick = async (product) => {
   });
 };
 
+// remove from wishlist
 const removeClick = async (product) => {
   const index = user.careItems.findIndex((item) => item.id === product.id);
   if (index !== -1) {
@@ -42,14 +44,16 @@ const removeClick = async (product) => {
   });
 };
 
+// check item in wishlist
 const checkItem = (product) => {
   return user.careItems.findIndex((item) => item.id === product.id) !== -1;
 };
 
+// Sorted with options
 let order = "asc";
 const sortAndSetProducts = (key) => {
-  const newProducts = ref(products.value);
-  products.value = newProducts.value.sort((a, b) => {
+  const newProducts = ref(productFilters.value);
+  productFilters.value = newProducts.value.sort((a, b) => {
     const order1 = order === "asc" ? 1 : -1;
     const comp =
       key === "name" ? a[key].localeCompare(b[key]) : a[key] - b[key];
@@ -72,6 +76,7 @@ const sortyByRate = () => {
   sortAndSetProducts("star");
 };
 
+// Sorted with icons
 const show = reactive({
   name: true,
   price: true,
@@ -204,9 +209,9 @@ const show = reactive({
       </li>
     </ul>
     <div class="grid grid-cols-4 gap-4">
-      <span v-if="isLoading">Loading...</span>
-      <template v-if="products">
-        <article v-for="product in products" :key="product.id">
+      <span v-if="store.isLoading">Loading...</span>
+      <template v-if="productFilters">
+        <article v-for="product in productFilters" :key="product.id">
           <div class="relative mb-4">
             <RouterLink :to="`/products/${product.id}`">
               <img

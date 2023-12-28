@@ -1,7 +1,7 @@
 <script setup></script>
 <template>
   <div class="container">
-    <h1 class="text-4xl font-bold mt-[30px]">Dashboard</h1>
+    <h1 class="text-4xl font-bold text-blue-700 mt-[30px]">Dashboard</h1>
     <div class="flex justify-between items-center mt-[30px]">
       <div
         class="flex justify-center bg-white items-center shadow-sm rounded py-[50px] px-[60px]"

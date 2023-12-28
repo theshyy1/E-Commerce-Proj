@@ -10,7 +10,8 @@ const { loginUser, logout } = useAuthStore();
 const searchText = ref("");
 
 const handleSubmit = () => {
-  productStore.getProducts(searchText.value);
+  productStore.getFilteredProducts(searchText.value);
+  searchText.value = "";
 };
 
 const handleLogout = () => {

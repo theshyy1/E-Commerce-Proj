@@ -3,7 +3,6 @@ import { ref } from "vue";
 import { useAuthStore } from "../store/auth";
 import { updateUser } from "../services/http";
 import { toast } from "vue3-toastify";
-import "vue3-toastify/dist/index.css";
 
 const {
   loginUser: { user },

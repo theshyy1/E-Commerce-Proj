@@ -1,25 +1,25 @@
 <script setup>
-import { storeToRefs } from "pinia";
 import { useProductStore } from "../../store";
-import { useAuthStore } from "../../store/auth";
-// import { deletedProduct } from "../../services/http";
 import { toast } from "vue3-toastify";
-import "vue3-toastify/dist/index.css";
-import { useRoute, useRouter } from "vue-router";
+import { useRouter } from "vue-router";
+import { computed, onMounted } from "vue";
 
-const router = useRoute();
+const router = useRouter();
+const store = useProductStore();
 
-const { products, isLoading, deleteProduct } = useProductStore();
-const {
-  loginUser: { user },
-} = useAuthStore();
-// const { products, isLoading } = storeToRefs(store);
+onMounted(() => store.getAllProducts());
+
+const products = computed(() => store.allProducts);
 
 const handleDelete = async (id) => {
-  const confirm = window.confirm("Are you sure you want to delete");
+  const confirm = window.confirm("Are you sure to delete this product?");
   if (confirm) {
-    await deleteProduct(id);
-    toast.error("Deleted successfully");
+    await store.sdeleteProduct(id);
+    toast.error("Deleted successfully", {
+      autoClose: 1500,
+      position: "bottom-right",
+      theme: "colored",
+    });
     router.push({ path: "/admin/products" });
   }
 };
@@ -27,15 +27,17 @@ const handleDelete = async (id) => {
 
 <template>
   <div class="h-[800px] overflow-y-scroll">
-    <h1 class="text-4xl font-bold mt-[30px]">Products</h1>
+    <h1 class="text-4xl font-bold text-blue-700 mt-[30px]">
+      Product Management
+    </h1>
     <button
-      class="block ml-auto bg-orange-500 text-white py-2 px-6 mb-2 hover:opacity-60"
+      class="block ml-auto bg-transparent text-blue-700 border-2 border-blue-700 py-2 px-6 mb-4 rounded-r-full rounded-l-full hover:opacity-60"
     >
-      <RouterLink to="/admin/products/create">ADD NEW</RouterLink>
+      <RouterLink to="/admin/products/create">Add New</RouterLink>
+      <i class="fa-solid fa-plus ml-2"></i>
     </button>
-    <p v-if="isLoading">isLoading...</p>
+    <p v-if="store.isLoading">isLoading...</p>
     <table
-      v-if="products.length > 0"
       class="w-full mx-auto bg-white border text-center border-neutral-300 shadow-md"
     >
       <thead>
@@ -69,7 +71,7 @@ const handleDelete = async (id) => {
             </button>
             <button
               class="bg-red-500 text-white py-2 px-6 mb-2 hover:opacity-60 rounded"
-              @click="handleDelete(product)"
+              @click="handleDelete(product.id)"
             >
               Del
             </button>

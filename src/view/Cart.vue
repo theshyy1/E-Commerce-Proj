@@ -3,7 +3,6 @@ import { computed, ref } from "vue";
 import { useAuthStore } from "../store/auth";
 import { updateUser } from "../services/http";
 import { toast } from "vue3-toastify";
-import "vue3-toastify/dist/index.css";
 import { RouterLink } from "vue-router";
 
 const {
@@ -91,7 +90,7 @@ const handleIncrease = async (product) => {
 
 const removeItem = async (product) => {
   const index = user.cart.findIndex((item) => item.id == product.id);
-  const confirm = window.confirm("Are you sure you want to remove");
+  const confirm = window.confirm("Are you sure to remove this item?");
   if (!confirm) return;
   user.cart.splice(index, 1);
   await updateUser(user);

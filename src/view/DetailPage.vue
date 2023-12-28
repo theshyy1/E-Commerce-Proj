@@ -7,7 +7,7 @@ const route = useRoute();
 const currentProduct = ref();
 onMounted(() => {
   async function getProductDetail() {
-    currentProduct.value = await getProduct(route.params.id);
+    currentProduct.value = (await getProduct(route.params.id)).data;
   }
   getProductDetail();
 });

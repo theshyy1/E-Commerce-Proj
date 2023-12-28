@@ -1,4 +1,4 @@
-import { createWebHistory, createRouter } from "vue-router";
+import { createWebHashHistory, createRouter } from "vue-router";
 import { useAuthStore } from "../store/auth";
 
 const routes = [
@@ -17,20 +17,25 @@ const routes = [
         path: "profile",
         name: "Profile",
         component: () => import("../view/Profile.vue"),
+        meta: { title: "Profile" },
       },
       {
         path: "profile/:id/edit",
         name: "Edit Profile",
         component: () => import("../view/EditProfile.vue"),
+        meta: { title: "Edit Profile" },
       },
       {
         path: "products/:id",
         name: "Product Detail",
         component: () => import("../view/DetailPage.vue"),
+        meta: { title: "Product Detail" },
       },
       {
         path: "about",
+        name: "About",
         component: () => import("../view/About.vue"),
+        meta: { title: "About" },
       },
       {
         path: "/signup",
@@ -50,16 +55,19 @@ const routes = [
         path: "/wishlist",
         name: "Wishlist",
         component: () => import("../view/Wishlist.vue"),
+        meta: { title: "Wishlist" },
       },
       {
         path: "/cart",
         name: "Cart",
         component: () => import("../view/Cart.vue"),
+        meta: { title: "My Cart" },
       },
       {
         path: "/checkout",
-        name: "Check out",
+        name: "Checkout",
         component: () => import("../view/Checkout.vue"),
+        meta: { title: "Checkout" },
       },
     ],
   },
@@ -73,28 +81,44 @@ const routes = [
         path: "dashboard",
         name: "Dashboard",
         component: () => import("../view/Admin/Dashboard.vue"),
+        meta: { title: "Dashboard" },
       },
       {
         path: "products",
         name: "Products",
         component: () => import("../view/Admin/Products.vue"),
+        meta: { title: "Product Management" },
       },
       {
         path: "products/create",
         name: "Create Product",
         component: () => import("../view/Admin/CreateForm.vue"),
+        meta: { title: "Create Product" },
       },
       {
         path: "users",
         name: "User",
         component: () => import("../view/Admin/User.vue"),
+        meta: { title: "User Management" },
+      },
+      {
+        path: "profile",
+        name: "Ad Profile",
+        component: () => import("../view/Profile.vue"),
+        meta: { title: "Profile" },
+      },
+      {
+        path: "profile/:id/edit",
+        name: "Ad EditProfile",
+        component: () => import("../view/EditProfile.vue"),
+        meta: { title: "Edit Profile" },
       },
     ],
   },
 ];
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   routes,
 });
 

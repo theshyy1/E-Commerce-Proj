@@ -14,7 +14,7 @@ const handleLogout = () => {
 
 <template>
   <ul
-    class="w-1/5 bg-green-800 text-white h-[800px] pr-2 border-b-2 float-left"
+    class="w-1/6 bg-green-800 text-white h-[800px] pr-2 border-b-2 float-left"
   >
     <li class="border-b-[1px] pb-3">
       <div class="flex justify-center items-center flex-col">
