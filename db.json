@@ -49,6 +49,16 @@
       "soldQuantity": 28,
       "image": "https://picsum.photos/275/250",
       "quantityInStock": 47
+    },
+    {
+      "name": "Product C",
+      "newPrice": "200",
+      "quantityInStock": "122",
+      "image": "",
+      "star": 3,
+      "soldQuantity": 0,
+      "oldPrice": 220,
+      "id": 6
     }
   ],
   "users": [
@@ -60,7 +70,7 @@
       "gender": "1",
       "birthDay": "1999-02-18",
       "address": "Hiệp Thuận, Phúc Thọ, Hà Nội",
-      "phone": "123456789",
+      "phone": "12345678129",
       "image": "/src/assets/hoangtrung.jpg",
       "description": "Front-end dev junior",
       "careItems": [],
@@ -110,17 +120,16 @@
       "image": "/src/assets/vuquynh.jpg",
       "id": 2,
       "role": "2",
-      "careItems": [],
-      "cart": [
+      "careItems": [
         {
-          "id": 3,
-          "name": "IPS LCD Gaming Monitor",
-          "oldPrice": 400,
-          "newPrice": 370,
+          "id": 1,
+          "name": "HAVIT HV-G92 Gamepad",
+          "oldPrice": 160,
+          "newPrice": 120,
           "star": 4,
-          "soldQuantity": 99,
-          "image": "https://picsum.photos/273/250",
-          "quantity": 1
+          "soldQuantity": 88,
+          "image": "https://picsum.photos/271/250",
+          "quantityInStock": 50
         },
         {
           "id": 2,
@@ -130,9 +139,10 @@
           "star": 5,
           "soldQuantity": 75,
           "image": "https://picsum.photos/272/250",
-          "quantity": 1
+          "quantityInStock": 50
         }
-      ]
+      ],
+      "cart": []
     },
     {
       "email": "manh@gmail.com",

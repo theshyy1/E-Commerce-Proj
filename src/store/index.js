@@ -28,7 +28,28 @@ export const useProductStore = defineStore("products", () => {
     }
   };
 
+  const deleteProduct = async (product) => {
+    try {
+      await axios.delete(`http://localhost:3000/products/${product.id}`);
+      allProducts.value = allProducts.value.splice(
+        allProducts.value.findIndex((item) => item.id === product.id)
+      );
+    } catch (error) {
+      console.log("ADD_ERROR", error);
+    }
+  };
+
+  const addProduct = async (product) => {
+    try {
+      const res = await axios.post("http://localhost:3000/products", product);
+      allProducts.value.push(product);
+      return res;
+    } catch (error) {
+      console.log("ADD_ERROR", error);
+    }
+  };
+
   getProducts();
 
-  return { products, isLoading, getProducts };
+  return { products, isLoading, getProducts, deleteProduct, addProduct };
 });

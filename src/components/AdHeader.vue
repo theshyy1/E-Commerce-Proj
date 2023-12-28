@@ -1,5 +1,5 @@
 <template>
-  <header class="bg-white text-black border-b-2 border-black">
+  <header class="bg-white text-black">
     <div class="py-[14px] flex justify-between items-center">
       <span></span>
       <p class="text-sm">

@@ -14,10 +14,15 @@ function key() {
     <AdHeader />
     <div class="">
       <Sidebar />
-      <router-view class="float-right w-4/5 p-6" v-slot="{ Component }">
+      <router-view
+        class="float-right bg-[#bbdff0] h-[800px] w-4/5 p-6"
+        v-slot="{ Component, route }"
+      >
         <transition name="fade" mode="out-in">
           <KeepAlive>
-            <component :is="Component" />
+            <div :key="route.name">
+              <component :is="Component" />
+            </div>
           </KeepAlive>
         </transition>
       </router-view>

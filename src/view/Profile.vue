@@ -26,13 +26,20 @@ const hidePhoneNumber = computed(() => {
     <div class="flex flex-col justify-center items-center">
       <h1 class="my-7 text-3xl font-bold text-sky-500">Profile Cá Nhân</h1>
       <RouterLink
+        v-if="user.role === '1'"
+        :to="`/admin/profile/${user.id}/edit`"
+        class="underline absolute top-8 right-[100px] hover:text-red-600"
+        ><i class="fa-solid fa-gear"></i> Thay đổi thông tin</RouterLink
+      >
+      <RouterLink
+        v-else
         :to="`/profile/${user.id}/edit`"
         class="underline absolute top-8 right-[100px] hover:text-red-600"
         ><i class="fa-solid fa-gear"></i> Thay đổi thông tin</RouterLink
       >
       <div class="">
         <img
-          :src="user.image || 'https://picsum.photos/200/200'"
+          :src="user?.image || 'https://picsum.photos/200/200'"
           class="rounded-full w-[200px] h-[200px] object-cover"
           alt=""
         />
