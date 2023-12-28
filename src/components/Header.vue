@@ -3,7 +3,6 @@ import { RouterLink } from "vue-router";
 import { ref } from "vue";
 import { useProductStore } from "../store";
 import { useAuthStore } from "../store/auth";
-import { storeToRefs } from "pinia";
 
 const productStore = useProductStore();
 const { loginUser, logout } = useAuthStore();

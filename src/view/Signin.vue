@@ -9,7 +9,7 @@ const router = useRouter();
 const { login } = useAuthStore();
 
 const user = reactive({
-  email: "admin@gmail.com",
+  email: "anhtrung@gmail.com",
   password: "anhtrung",
 });
 

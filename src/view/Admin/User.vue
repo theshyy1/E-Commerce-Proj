@@ -1,6 +1,7 @@
 <script setup>
 import { computed, onMounted, ref } from "vue";
 import { useAuthStore } from "../../store/auth";
+import { toast } from "vue3-toastify";
 
 const authStore = useAuthStore();
 onMounted(() => authStore.getUsers());
@@ -12,6 +13,14 @@ const selectedUser = ref(null);
 function handleShow(id) {
   selectedUser.value = selectedUser.value === id ? "null" : id;
 }
+
+const handleDeleteUser = (id) => {
+  toast.error("Deleted successfully", {
+    position: "bottom-right",
+    autoClose: 1500,
+    theme: "colored",
+  });
+};
 </script>
 
 <template>
@@ -32,13 +41,16 @@ function handleShow(id) {
         <section class="flex items-center">
           <img
             src="https://picsum.photos/80/80"
-            class="object-cover rounded-full mr-5"
+            class="object-cover rounded-full mr-5 shadow-md"
             alt=""
           />
           <article class="">
             <h3 class="text-xl">{{ user.name }}</h3>
-            <p class="text-sm my-2">{{ user.email }}</p>
-            <span>{{ user.phone }}</span>
+            <p class="text-sm my-2">
+              <i class="fa-solid fa-envelope-open-text mr-2"></i
+              >{{ user.email }}
+            </p>
+            <span><i class="fa-solid fa-phone mr-2"></i>{{ user.phone }}</span>
           </article>
         </section>
         <span
@@ -59,6 +71,7 @@ function handleShow(id) {
               </button>
               <button
                 class="text-black hover:bg-orange-500 hover:text-white px-2 py-1"
+                @click="handleDeleteUser(user.id)"
               >
                 <i class="fa-solid fa-delete-left"></i>
                 Delete

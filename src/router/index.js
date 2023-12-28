@@ -38,20 +38,6 @@ const routes = [
         meta: { title: "About" },
       },
       {
-        path: "/signup",
-        name: "Signup",
-        component: () => import("../view/Signup.vue"),
-        meta: { title: "Sign Up" },
-        hidden: true,
-      },
-      {
-        path: "/signin",
-        name: "Signin",
-        component: () => import("../view/Signin.vue"),
-        meta: { title: "Sign In" },
-        hidden: true,
-      },
-      {
         path: "/wishlist",
         name: "Wishlist",
         component: () => import("../view/Wishlist.vue"),
@@ -70,6 +56,25 @@ const routes = [
         meta: { title: "Checkout" },
       },
     ],
+  },
+  {
+    path: "/signup",
+    name: "Signup",
+    component: () => import("../view/Signup.vue"),
+    meta: { title: "Sign Up" },
+    hidden: true,
+  },
+  {
+    path: "/signin",
+    name: "Signin",
+    component: () => import("../view/Signin.vue"),
+    meta: { title: "Sign In" },
+    hidden: true,
+  },
+  {
+    path: "/404",
+    name: "Not Found",
+    component: () => import("../view/404.vue"),
   },
   {
     path: "/admin",
@@ -115,6 +120,7 @@ const routes = [
       },
     ],
   },
+  { path: "/:CatchAll(.*)", redirect: "/404", hidden: true },
 ];
 
 const router = createRouter({
@@ -126,7 +132,7 @@ router.beforeEach(async (to, from, next) => {
   const authStore = useAuthStore();
   if (!authStore.loginUser.isLoggin) {
     if (to.name === "Signin" || to.name === "Signup") {
-      next(); //allowed
+      next();
     } else {
       next({ name: "Signin" });
     }

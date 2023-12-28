@@ -72,7 +72,7 @@ const handleLogout = () => {
       <RouterLink
         class="py-5 px-5 border-b-[1px] border-gray-200 hover:bg-orange-500 block"
         to="/admin/setting"
-        ><i class="fa-solid fa-right-from-bracket"></i>Logout</RouterLink
+        ><i class="fa-solid fa-right-from-bracket mr-3"></i>Logout</RouterLink
       >
     </li>
   </ul>

@@ -65,38 +65,7 @@
       "description": "Front-end dev junior",
       "careItems": [],
       "role": "1",
-      "cart": [
-        {
-          "id": 2,
-          "name": "AK-900 Wired Keyboard",
-          "oldPrice": 1160,
-          "newPrice": 960,
-          "star": 5,
-          "soldQuantity": 75,
-          "image": "https://picsum.photos/270/250",
-          "quantity": 1
-        },
-        {
-          "id": 1,
-          "name": "HAVIT HV-G92 Gamepad",
-          "oldPrice": 160,
-          "newPrice": 120,
-          "star": 4,
-          "soldQuantity": 88,
-          "image": "https://picsum.photos/270/250",
-          "quantity": 1
-        },
-        {
-          "id": 3,
-          "name": "IPS LCD Gaming Monitor",
-          "oldPrice": 400,
-          "newPrice": 370,
-          "star": 4,
-          "soldQuantity": 99,
-          "image": "https://picsum.photos/270/250",
-          "quantity": 1
-        }
-      ]
+      "cart": []
     },
     {
       "email": "admin@gmail.com",
