@@ -48,3 +48,21 @@ export const getProduct = async (id) => {
     console.log("GET_ERROR", error);
   }
 };
+
+export const addProduct = async (product) => {
+  try {
+    const res = await instance.post("http://localhost:3000/products", product);
+    return res;
+  } catch (error) {
+    console.log("ADD_ERROR", error);
+  }
+};
+
+export const deletedProduct = async (id) => {
+  try {
+    const res = await instance.delete(`http://localhost:3000/products/${id}`);
+    return res;
+  } catch (error) {
+    console.log("ADD_ERROR", error);
+  }
+};

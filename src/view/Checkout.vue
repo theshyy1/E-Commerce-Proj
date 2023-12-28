@@ -48,6 +48,7 @@ const totalPriceItems = computed(() => {
 
 const handleCheckout = async () => {
   loginUser.user.cart = [];
+  payFee.value = 0;
   await updateUser(loginUser.user);
   toast.success("Checkout successfully", {
     autoClose: 1500,

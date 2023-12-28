@@ -205,7 +205,7 @@ const show = reactive({
     </ul>
     <div class="grid grid-cols-4 gap-4">
       <span v-if="isLoading">Loading...</span>
-      <template v-else>
+      <template v-if="products">
         <article v-for="product in products" :key="product.id">
           <div class="relative mb-4">
             <RouterLink :to="`/products/${product.id}`">

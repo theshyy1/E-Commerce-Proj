@@ -25,7 +25,7 @@ const handleSave = async (event) => {
 <template>
   <div class="container h-[800px] bg-neutral-300 shadow-md">
     <div class="flex flex-col justify-center items-center">
-      <h1 class="my-7 text-3xl font-bold">Chỉnh sửa thông tin</h1>
+      <h1 class="my-2 text-3xl font-bold">Chỉnh sửa thông tin</h1>
       <div class="">
         <img
           :src="user.image || 'https://picsum.photos/200/200'"
