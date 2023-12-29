@@ -2,13 +2,14 @@
 import { computed, onMounted, reactive, ref } from "vue";
 import { useProductStore } from "../store";
 import { useAuthStore } from "../store/auth";
-import { updateUser } from "../services/http";
+import { updateUserAPI } from "../services/http";
 import { toast } from "vue3-toastify";
 import { RouterLink } from "vue-router";
+import { useFetch } from "@vueuse/core";
 
 const store = useProductStore();
 const {
-  loginUser: { user },
+  userState: { user },
 } = useAuthStore();
 
 onMounted(() => store.getFilteredProducts());
@@ -21,7 +22,7 @@ const handleClick = async (product) => {
     user.careItems.unshift(product);
   }
 
-  await updateUser(user);
+  await updateUserAPI(user);
   toast.success("Added x1", {
     autoClose: 1500,
     position: "bottom-right",
@@ -36,7 +37,7 @@ const removeClick = async (product) => {
     user.careItems.splice(index, 1);
   }
 
-  await updateUser(user);
+  await updateUserAPI(user);
   toast.error("Removed x1", {
     autoClose: 1500,
     position: "bottom-right",

@@ -1,12 +1,12 @@
 <script setup>
 import { computed, ref } from "vue";
 import { useAuthStore } from "../store/auth";
-import { updateUser } from "../services/http";
+import { updateUserAPI } from "../services/http";
 import { toast } from "vue3-toastify";
 import { RouterLink } from "vue-router";
 
 const {
-  loginUser: { user },
+  userState: { user },
 } = useAuthStore();
 
 // Discount price
@@ -55,7 +55,7 @@ const handleDecrease = async (product) => {
 
   if (user.cart[index].quantity > 1) {
     user.cart[index].quantity--;
-    await updateUser(user);
+    await updateUserAPI(user);
     toast.error("-1 item", {
       autoClose: 1500,
       position: "bottom-right",
@@ -67,7 +67,7 @@ const handleDecrease = async (product) => {
     );
     if (confirm) {
       user.cart.splice(index, 1);
-      await updateUser(user);
+      await updateUserAPI(user);
       toast.error("Removed -1", {
         autoClose: 1500,
         position: "bottom-right",
@@ -80,7 +80,7 @@ const handleDecrease = async (product) => {
 const handleIncrease = async (product) => {
   const index = user.cart.findIndex((item) => item.id == product.id);
   user.cart[index].quantity++;
-  await updateUser(user);
+  await updateUserAPI(user);
   toast.success("Added +1", {
     autoClose: 1500,
     position: "bottom-right",
@@ -93,7 +93,7 @@ const removeItem = async (product) => {
   const confirm = window.confirm("Are you sure to remove this item?");
   if (!confirm) return;
   user.cart.splice(index, 1);
-  await updateUser(user);
+  await updateUserAPI(user);
 };
 </script>
 

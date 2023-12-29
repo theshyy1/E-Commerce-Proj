@@ -4,7 +4,7 @@ import { computed, ref } from "vue";
 import { RouterLink } from "vue-router";
 
 const {
-  loginUser: { user },
+  userState: { user },
 } = useAuthStore();
 
 const birthday = computed(() =>

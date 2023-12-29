@@ -5,7 +5,7 @@ import { useProductStore } from "../store";
 import { useAuthStore } from "../store/auth";
 
 const productStore = useProductStore();
-const { loginUser, logout } = useAuthStore();
+const { userState, logout } = useAuthStore();
 const searchText = ref("");
 
 const handleSubmit = () => {
@@ -81,9 +81,9 @@ const handleLogout = () => {
               >Wishlist</span
             >
             <span
-              v-if="loginUser.user?.careItems?.length > 0"
+              v-if="userState.user?.careItems?.length > 0"
               class="flex justify-center absolute top-[-7px] right-[-10px] text-sm w-5 h-5 rounded-full bg-orange-800 text-white"
-              >{{ loginUser.user?.careItems.length }}</span
+              >{{ userState.user?.careItems.length }}</span
             >
           </RouterLink>
           <RouterLink to="/cart" class="hover-trigger group relative">
@@ -92,11 +92,11 @@ const handleLogout = () => {
               class="hidden group-hover:flex w-[300px] h-[230px] bg-white text-black absolute top-[30px] right-0 z-[2] justify-center items-center text-base shadow-md border-[1px] border-neutral-300 overflow-y-auto"
             >
               <ul
-                v-if="loginUser.user?.cart?.length > 0"
+                v-if="userState.user?.cart?.length > 0"
                 class="space-y-2 h-full py-2 my-4"
               >
                 <li
-                  v-for="item in loginUser.user.cart"
+                  v-for="item in userState.user.cart"
                   class="flex justify-between items-center"
                 >
                   <RouterLink
@@ -127,7 +127,7 @@ const handleLogout = () => {
               <span v-else>Chưa có sản phẩm</span>
             </div>
           </RouterLink>
-          <span v-if="loginUser.isLoggin" class="hover-trigger group relative">
+          <span v-if="userState.isLoggin" class="hover-trigger group relative">
             <i class="fa-regular fa-user"></i>
             <Transition name="fade">
               <ul

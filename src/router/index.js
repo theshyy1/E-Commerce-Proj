@@ -130,7 +130,7 @@ const router = createRouter({
 
 router.beforeEach(async (to, from, next) => {
   const authStore = useAuthStore();
-  if (!authStore.loginUser.isLoggin) {
+  if (!authStore.userState.isLoggin) {
     if (to.name === "Signin" || to.name === "Signup") {
       next();
     } else {

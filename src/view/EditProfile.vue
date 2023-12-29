@@ -1,21 +1,20 @@
-<!-- UserInfo.vue -->
 <script setup>
 import { useAuthStore } from "../store/auth";
-import { updateUser } from "../services/http";
+import { updateUserAPI } from "../services/http";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
 const {
-  loginUser: { user },
+  userState: { user },
 } = useAuthStore();
 
 const handleSave = async (event) => {
   event.preventDefault();
-  const res = await updateUser(user);
-  if (res.role === "1") {
-    router.push({ path: "/profile" });
-  } else {
+  await updateUserAPI(user);
+  if (user.role === "1") {
     router.push({ path: "/admin/profile" });
+  } else {
+    router.push({ path: "/profile" });
   }
 };
 </script>

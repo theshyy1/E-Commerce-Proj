@@ -1,5 +1,4 @@
 <script setup>
-import { storeToRefs } from "pinia";
 import { useAuthStore } from "../store/auth";
 import { reactive } from "vue";
 import { RouterLink, useRouter } from "vue-router";
@@ -9,26 +8,26 @@ const router = useRouter();
 const { login } = useAuthStore();
 
 const user = reactive({
-  email: "anhtrung@gmail.com",
+  email: "admin@gmail.com",
   password: "anhtrung",
 });
 
 const handleLogin = async () => {
-  try {
-    const res = await login(user);
-    if (res.user.role === "1") {
-      router.push({ path: "/admin" });
-    } else {
-      router.push({ path: "/" });
-    }
-    toast.success("Đăng nhập thành công !", {
-      autoClose: 2000,
-      position: "top-center",
-      theme: "colored",
-    });
-  } catch (error) {
-    console.log(error.message);
+  const res = await login(user);
+  if (res.user.role === "1") {
+    router.push({ path: "/admin" });
+  } else {
+    router.push({ path: "/" });
   }
+  toast.success("Đăng nhập thành công !", {
+    autoClose: 2000,
+    position: "top-center",
+    theme: "colored",
+  });
+  // try {
+  // } catch (error) {
+  //   console.log(error.response.data);
+  // }
 };
 </script>
 

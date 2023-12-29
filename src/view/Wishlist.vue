@@ -1,11 +1,11 @@
 <script setup>
 import { ref } from "vue";
 import { useAuthStore } from "../store/auth";
-import { updateUser } from "../services/http";
+import { updateUserAPI } from "../services/http";
 import { toast } from "vue3-toastify";
 
 const {
-  loginUser: { user },
+  userState: { user },
 } = useAuthStore();
 
 const moveAllToBag = async () => {
@@ -25,7 +25,7 @@ const moveAllToBag = async () => {
   user.cart = myLastItems;
   user.careItems = [];
 
-  await updateUser(user);
+  await updateUserAPI(user);
   toast.success("Moved all to bag", {
     autoClose: 1500,
     position: "bottom-right",
@@ -41,7 +41,7 @@ const addToCart = async (product) => {
     user.cart.push({ ...product, quantity: 1 });
   }
 
-  const res = await updateUser(user);
+  const res = await updateUserAPI(user);
   if (res) {
     toast.success("Added x1", {
       autoClose: 1500,
@@ -55,7 +55,7 @@ const handleDelete = async (product) => {
   const index = user.careItems.findIndex((item) => item.id === product.id);
   if (index !== -1) {
     user.careItems.splice(index, 1);
-    await updateUser(user);
+    await updateUserAPI(user);
     toast.error("Removed x1", {
       autoClose: 1500,
       position: "bottom-right",

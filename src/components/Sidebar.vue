@@ -3,7 +3,7 @@ import { RouterLink } from "vue-router";
 import { useAuthStore } from "../store/auth";
 
 const {
-  loginUser: { user },
+  userState: { user },
   logout,
 } = useAuthStore();
 

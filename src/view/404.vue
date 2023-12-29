@@ -6,7 +6,7 @@ const router = useRouter();
 const authStore = useAuthStore();
 
 const handleClickBack = () => {
-  if (authStore.loginUser.user.role === "1") {
+  if (authStore.userState.user.role === "1") {
     router.push({ path: "/admin/dashboard" });
   } else {
     router.push({ path: "/" });

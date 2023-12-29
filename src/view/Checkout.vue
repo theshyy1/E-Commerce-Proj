@@ -2,13 +2,13 @@
 import { computed, ref } from "vue";
 import { useAuthStore } from "../store/auth";
 import { toast } from "vue3-toastify";
-import { updateUser } from "../services/http";
+import { updateUserAPI } from "../services/http";
 
-const { loginUser } = useAuthStore();
+const { userState } = useAuthStore();
 
 // Discount price
 const codeDiscount = ref("");
-const shipPrice = ref(loginUser.user.cart.length * 20);
+const shipPrice = ref(userState.user.cart.length * 20);
 const payFee = ref(shipPrice.value);
 
 const getDiscount = computed(() => {
@@ -38,7 +38,7 @@ function getPriceDiscount() {
 }
 
 const totalPriceItems = computed(() => {
-  const total = loginUser.user.cart.reduce(
+  const total = userState.user.cart.reduce(
     (total, num) => total + num.quantity * num.newPrice,
     0
   );
@@ -46,9 +46,9 @@ const totalPriceItems = computed(() => {
 });
 
 const handleCheckout = async () => {
-  loginUser.user.cart = [];
+  userState.user.cart = [];
   payFee.value = 0;
-  await updateUser(loginUser.user);
+  await updateUserAPI(userState.user);
   toast.success("Checkout successfully", {
     autoClose: 1500,
     position: "bottom-right",
@@ -119,8 +119,8 @@ const handleCheckout = async () => {
         <div
           class="w-full h-[230px] bg-white text-black text-base shadow-md overflow-y-auto"
         >
-          <ul v-if="loginUser.user?.cart.length > 0" class="space-y-2 w-full">
-            <li v-for="item in loginUser.user.cart">
+          <ul v-if="userState.user?.cart.length > 0" class="space-y-2 w-full">
+            <li v-for="item in userState.user.cart">
               <RouterLink
                 :to="`/products/${item.id}`"
                 class="flex justify-around items-center w-full"

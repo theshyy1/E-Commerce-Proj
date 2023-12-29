@@ -62,7 +62,7 @@
       "address": "Hiệp Thuận, Phúc Thọ, Hà Nội",
       "phone": "123456781291",
       "image": "/src/assets/hoangtrung.jpg",
-      "description": "Front-end dev junior",
+      "description": "Front-end dev juniors",
       "careItems": [],
       "role": "1",
       "cart": []
@@ -70,7 +70,7 @@
     {
       "email": "admin@gmail.com",
       "password": "$2a$10$sWQ5Ar8cHzfrzDi5C46XT.QRoPeGdzvfFrQc/6Udz0llIO0BB0xQS",
-      "name": "Vũ Ánh Quỳnh",
+      "name": "Vũ Ánh Quỳnh X",
       "phone": "0123456789",
       "address": "Nam Định",
       "gender": "2",
@@ -81,29 +81,17 @@
       "role": "2",
       "careItems": [
         {
-          "id": 1,
-          "name": "HAVIT HV-G92 Gamepad",
-          "oldPrice": 160,
-          "newPrice": 120,
-          "star": 4,
+          "id": 4,
+          "name": "S-Series Comfort Chair",
+          "oldPrice": 400,
+          "newPrice": 375,
+          "star": 3,
           "soldQuantity": 88,
-          "image": "https://picsum.photos/271/250",
-          "quantityInStock": 50
+          "image": "https://picsum.photos/274/250",
+          "quantityInStock": 58
         }
       ],
-      "cart": [
-        {
-          "id": 1,
-          "name": "HAVIT HV-G92 Gamepad",
-          "oldPrice": 160,
-          "newPrice": 120,
-          "star": 4,
-          "soldQuantity": 88,
-          "image": "https://picsum.photos/271/250",
-          "quantityInStock": 50,
-          "quantity": 1
-        }
-      ]
+      "cart": []
     },
     {
       "email": "admin3@gmail.com",

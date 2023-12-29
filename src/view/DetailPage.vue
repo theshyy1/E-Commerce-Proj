@@ -1,13 +1,13 @@
 <script setup>
 import { useRoute } from "vue-router";
-import { getProduct } from "../services/http";
+import { getProductAPI } from "../services/http";
 import { onMounted, ref } from "vue";
 
 const route = useRoute();
 const currentProduct = ref();
 onMounted(() => {
   async function getProductDetail() {
-    currentProduct.value = (await getProduct(route.params.id)).data;
+    currentProduct.value = (await getProductAPI(route.params.id)).data;
   }
   getProductDetail();
 });
