@@ -4,7 +4,7 @@ import { useProductStore } from "../store";
 import { useAuthStore } from "../store/auth";
 import { updateUserAPI } from "../services/http";
 import { toast } from "vue3-toastify";
-import { RouterLink } from "vue-router";
+import { RouterLink, useRoute } from "vue-router";
 
 const store = useProductStore();
 const {
@@ -78,6 +78,25 @@ const show = reactive({
   name: true,
   price: true,
   star: false,
+});
+
+// Pagination
+const itemsPerPage = 4;
+const route = useRoute();
+
+const currentPage = computed(() => {
+  const page = parseInt(route.query.page) || 1;
+  return page;
+});
+
+const paginatedProducts = computed(() => {
+  const startIndex = (currentPage.value - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  return productFilters.value.slice(startIndex, endIndex);
+});
+
+const totalPages = computed(() => {
+  return Math.ceil(productFilters.value.length / itemsPerPage);
 });
 </script>
 
@@ -207,8 +226,8 @@ const show = reactive({
     </ul>
     <div class="grid grid-cols-4 gap-4">
       <span v-if="store.isLoading">Loading...</span>
-      <template v-if="productFilters">
-        <article v-for="product in productFilters" :key="product.id">
+      <template v-if="paginatedProducts">
+        <article v-for="product in paginatedProducts" :key="product.id">
           <div class="relative mb-4">
             <RouterLink :to="`/products/${product.id}`">
               <img
@@ -256,12 +275,22 @@ const show = reactive({
           </div>
         </article>
       </template>
-      <div class="">
-        <ul class="flex space-x-3">
-          <RouterLink to="/products?page=1">1</RouterLink>
-          <RouterLink to="/products?page=2">2</RouterLink>
-          <RouterLink to="/products?page=3">3</RouterLink>
-        </ul>
+
+      <div class="mt-4">
+        <!-- Hiển thị phân trang -->
+        <nav class="flex justify-center">
+          <ul class="flex">
+            <li v-for="page in totalPages" :key="page">
+              <router-link
+                :to="`/products?page=${page}`"
+                class="px-3 py-1 rounded border border-gray-300 mr-2"
+                :class="currentPage === page ? 'bg-gray-300' : ''"
+              >
+                {{ page }}
+              </router-link>
+            </li>
+          </ul>
+        </nav>
       </div>
     </div>
     <div class="">
@@ -273,14 +302,3 @@ const show = reactive({
     </div>
   </section>
 </template>
-
-<style>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
-}
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-}
-</style>

@@ -185,8 +185,7 @@
       "password": "$2a$10$GgYgVUb5fReKxUiu.0EcnuEXbDaUyDG9qafFrNp0FmIJhkNhiJWP6",
       "name": "Kim Van Long",
       "confirm_password": "anhtrung",
-      "careItems": [],
-      "cart": [
+      "careItems": [
         {
           "id": 6,
           "name": "Mac M1",
@@ -195,21 +194,10 @@
           "star": 5,
           "soldQuantity": 88,
           "image": "https://picsum.photos/271/251",
-          "quantityInStock": 50,
-          "quantity": 1
-        },
-        {
-          "id": 5,
-          "name": "S-Series Comfort Chair 1",
-          "oldPrice": 333,
-          "newPrice": 300,
-          "star": 2,
-          "soldQuantity": 28,
-          "image": "https://picsum.photos/275/250",
-          "quantityInStock": 47,
-          "quantity": 1
+          "quantityInStock": 50
         }
       ],
+      "cart": [],
       "role": "2",
       "id": 6
     }

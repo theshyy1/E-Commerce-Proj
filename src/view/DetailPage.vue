@@ -5,6 +5,7 @@ import { onMounted, ref } from "vue";
 
 const route = useRoute();
 const currentProduct = ref(null);
+
 onMounted(() => {
   getProductAPI(route.params.id).then(
     ({ data }) => (currentProduct.value = data)
@@ -12,15 +13,14 @@ onMounted(() => {
 });
 
 const quantity = ref(1);
-function increaseSL() {
-  quantity.value = quantity.value + 1;
+function increaseQuantity() {
+  quantity.value++;
 }
 
-function decreaseSL() {
-  if (quantity.value <= 0) {
-    return;
+function decreaseQuantity() {
+  if (quantity.value > 0) {
+    quantity.value--;
   }
-  quantity.value = quantity.value - 1;
 }
 </script>
 
@@ -96,9 +96,9 @@ function decreaseSL() {
           <div
             class="border-[1px] border-black rounded w-[100px] flex justify-around p-1"
           >
-            <span class="block px-3" @click="decreaseSL"> - </span>
+            <span class="block px-3" @click="increaseQuantity"> - </span>
             <span> {{ quantity || 1 }} </span>
-            <span class="block px-3" @click="increaseSL"> + </span>
+            <span class="block px-3" @click="decreaseQuantity"> + </span>
           </div>
           <button
             class="bg-orange-500 text-white py-2 px-7 rounded hover:opacity-60"

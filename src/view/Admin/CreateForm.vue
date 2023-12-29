@@ -4,6 +4,14 @@ import { useRouter } from "vue-router";
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
 import { useProductStore } from "../../store";
+import Joi from "joi";
+
+const productSchema = Joi.object({
+  name: Joi.string().required(),
+  newPrice: Joi.number().min(0).required(),
+  quantityInStock: Joi.number().min(0).required(),
+  image: Joi.string().uri().required(),
+});
 
 const router = useRouter();
 const store = useProductStore();
@@ -16,19 +24,33 @@ const newProduct = reactive({
 });
 
 const handleSubmit = async () => {
-  const product = {
-    ...newProduct,
-    star: 3,
-    soldQuantity: 0,
-    oldPrice: (newProduct.newPrice * 110) / 100,
-  };
-  await store.saddProduct(product);
-  router.push({ path: "/admin/products", replace: true });
-  toast.success("Added successfully", {
-    autoClose: 1500,
-    position: "bottom-right",
-    theme: "colored",
-  });
+  try {
+    const { error, value } = productSchema.validate(newProduct);
+    if (error) {
+      toast.error("Error: " + error.message, {
+        autoClose: 3000,
+        position: "bottom-right",
+        theme: "colored",
+      });
+      return;
+    }
+
+    const product = {
+      ...value,
+      star: 3,
+      soldQuantity: 0,
+      oldPrice: (value.newPrice * 110) / 100,
+    };
+    await store.addProduct(product);
+    await router.push({ path: "/admin/products", replace: true });
+    toast.success("Added successfully", {
+      autoClose: 1500,
+      position: "bottom-right",
+      theme: "colored",
+    });
+  } catch (error) {
+    console.error("Error adding product:", error);
+  }
 };
 </script>
 

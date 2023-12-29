@@ -10,17 +10,16 @@ const store = useProductStore();
 onMounted(() => store.getAllProducts());
 
 const products = computed(() => store.allProducts);
-
 const handleDelete = async (id) => {
   const confirm = window.confirm("Are you sure to delete this product?");
   if (confirm) {
-    await store.sdeleteProduct(id);
+    await store.deleteProduct(id);
+    await router.push({ path: "/admin/products" });
     toast.error("Deleted successfully", {
       autoClose: 1500,
       position: "bottom-right",
       theme: "colored",
     });
-    router.push({ path: "/admin/products" });
   }
 };
 </script>

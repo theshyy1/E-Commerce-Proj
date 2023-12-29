@@ -32,7 +32,7 @@ export const useProductStore = defineStore("products", () => {
     }
   };
 
-  const sdeleteProduct = async (id) => {
+  const deleteProduct = async (id) => {
     try {
       await deleteProductAPI(id);
       allProducts.value = allProducts.value.filter((item) => item.id !== id);
@@ -41,7 +41,7 @@ export const useProductStore = defineStore("products", () => {
     }
   };
 
-  const saddProduct = async (product) => {
+  const addProduct = async (product) => {
     try {
       await addProductAPI(product);
       allProducts.value.push(product);
@@ -61,7 +61,7 @@ export const useProductStore = defineStore("products", () => {
     isLoading,
     getFilteredProducts,
     getAllProducts,
-    sdeleteProduct,
-    saddProduct,
+    deleteProduct,
+    addProduct,
   };
 });
