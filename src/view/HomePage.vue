@@ -16,7 +16,8 @@ const productFilters = computed(() => store.allProducts);
 
 // add to wishlist
 const handleClick = async (product) => {
-  const index = user.careItems.findIndex((item) => item.id === product.id);
+  const index =
+    user && user?.careItems.findIndex((item) => item.id === product.id);
   if (index === -1) {
     user.careItems.unshift(product);
   }
@@ -46,7 +47,7 @@ const removeClick = async (product) => {
 
 // check item in wishlist
 const checkItem = (product) => {
-  return user.careItems.findIndex((item) => item.id === product.id) !== -1;
+  return user?.careItems?.findIndex((item) => item.id === product.id) !== -1;
 };
 
 // Sorted with options

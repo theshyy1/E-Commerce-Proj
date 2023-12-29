@@ -25,9 +25,9 @@ export const useAuthStore = defineStore("auth", () => {
         userState.user = data.user;
         userState.isLoggin = true;
         if (data.user.role === "1") {
-          router.push({ path: "/admin" });
+          await router.push({ path: "/admin" });
         } else {
-          router.push({ path: "/" });
+          await router.push({ path: "/" });
         }
         toast.success("Đăng nhập thành công !", {
           autoClose: 1500,

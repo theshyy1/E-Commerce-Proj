@@ -109,8 +109,31 @@
       "image": "/src/assets/vuquynh.jpg",
       "id": 2,
       "role": "2",
-      "careItems": [],
-      "cart": []
+      "careItems": [
+        {
+          "id": 2,
+          "name": "AK-900 Wired Keyboard",
+          "oldPrice": 1160,
+          "newPrice": 960,
+          "star": 5,
+          "soldQuantity": 75,
+          "image": "https://picsum.photos/272/250",
+          "quantityInStock": 50
+        }
+      ],
+      "cart": [
+        {
+          "id": 2,
+          "name": "AK-900 Wired Keyboard",
+          "oldPrice": 1160,
+          "newPrice": 960,
+          "star": 5,
+          "soldQuantity": 75,
+          "image": "https://picsum.photos/272/250",
+          "quantityInStock": 50,
+          "quantity": 1
+        }
+      ]
     },
     {
       "email": "admin3@gmail.com",
@@ -158,23 +181,37 @@
       "cart": []
     },
     {
-      "email": "manh@gmail.com",
-      "password": "$2a$10$TtG8HErdyHu7e2qPv6tb4Ofsbcbx0ViNstYuhXNY4s4sNZG3mgRYG",
-      "name": "Manh",
+      "email": "kimlong@gmail.com",
+      "password": "$2a$10$GgYgVUb5fReKxUiu.0EcnuEXbDaUyDG9qafFrNp0FmIJhkNhiJWP6",
+      "name": "Kim Van Long",
+      "confirm_password": "anhtrung",
+      "careItems": [],
+      "cart": [
+        {
+          "id": 6,
+          "name": "Mac M1",
+          "oldPrice": 1200,
+          "newPrice": 1099,
+          "star": 5,
+          "soldQuantity": 88,
+          "image": "https://picsum.photos/271/251",
+          "quantityInStock": 50,
+          "quantity": 1
+        },
+        {
+          "id": 5,
+          "name": "S-Series Comfort Chair 1",
+          "oldPrice": 333,
+          "newPrice": 300,
+          "star": 2,
+          "soldQuantity": 28,
+          "image": "https://picsum.photos/275/250",
+          "quantityInStock": 47,
+          "quantity": 1
+        }
+      ],
+      "role": "2",
       "id": 6
-    },
-    {
-      "email": "trungv@gmail.com",
-      "password": "$2a$10$gfEobLtSqviR/20dGY6Oue7GO.hwuMvB/y0yfi0gxze0M222psd2a",
-      "name": "Trung",
-      "id": 7
-    },
-    {
-      "email": "trung@gmail.com",
-      "password": "$2a$10$YIQOfpALnqrcGnOv8L4U7O9819t2EUL1/GQ2OPgJhWXPF0AAg2HXC",
-      "name": "Hoang",
-      "repeat_password": "anhtrung",
-      "id": 8
     }
   ]
 }

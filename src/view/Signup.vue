@@ -16,7 +16,7 @@ const userSchema = Joi.object({
     .min(10)
     .max(25)
     .required(),
-  password: Joi.string().required(),
+  password: Joi.string().min(8).max(16).required(),
   confirm_password: Joi.ref("password"),
 });
 
@@ -32,6 +32,7 @@ const errors = reactive({
   name: null,
   email: null,
   password: null,
+  confirm_password: null,
 });
 
 const handleLogin = async () => {
@@ -46,12 +47,13 @@ const handleLogin = async () => {
 
     return;
   } else {
-    await registerAPI(userLogin);
+    const newUser = { ...userLogin, careItems: [], cart: [], role: "2" };
+    await registerAPI(newUser);
+    await router.push({ path: "/signin" });
     toast.success("Đăng ký thành công, Đăng nhập ngay !!", {
-      autoClose: 2000,
+      autoClose: 1500,
       theme: "colored",
     });
-    router.push({ path: "/signin" });
   }
 };
 </script>
