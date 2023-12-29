@@ -4,16 +4,14 @@ import { getProductAPI } from "../services/http";
 import { onMounted, ref } from "vue";
 
 const route = useRoute();
-const currentProduct = ref();
+const currentProduct = ref(null);
 onMounted(() => {
-  async function getProductDetail() {
-    currentProduct.value = (await getProductAPI(route.params.id)).data;
-  }
-  getProductDetail();
+  getProductAPI(route.params.id).then(
+    ({ data }) => (currentProduct.value = data)
+  );
 });
 
 const quantity = ref(1);
-
 function increaseSL() {
   quantity.value = quantity.value + 1;
 }

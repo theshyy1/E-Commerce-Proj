@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { computed, reactive, ref } from "vue";
+import { reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 import { getAllUsersAPI, signinAPI } from "../services/http";
 
@@ -18,15 +18,16 @@ export const useAuthStore = defineStore("auth", () => {
   const login = async (user) => {
     const res = await signinAPI(user);
     const data = res.data;
-
     try {
       if (data && data.accessToken && data.user) {
         userState.token = data.accessToken;
         userState.user = data.user;
         userState.isLoggin = true;
-        return data;
-      } else {
-        console.error("Error:", data);
+        if (data.user.role === "1") {
+          router.push({ path: "/admin" });
+        } else {
+          router.push({ path: "/" });
+        }
       }
     } catch (error) {
       console.error("Error Login:", error);
@@ -41,9 +42,10 @@ export const useAuthStore = defineStore("auth", () => {
     router.push({ path: "/signin" });
   };
 
-  const getUsers = async () => {
-    const res = await getAllUsersAPI();
-    allUsers.value = res.data;
+  const getUsers = () => {
+    getAllUsersAPI().then((data) => {
+      allUsers.value = data.data;
+    });
   };
 
   return { userState, allUsers, login, logout, getUsers };

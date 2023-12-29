@@ -5,7 +5,6 @@ import { useAuthStore } from "../store/auth";
 import { updateUserAPI } from "../services/http";
 import { toast } from "vue3-toastify";
 import { RouterLink } from "vue-router";
-import { useFetch } from "@vueuse/core";
 
 const store = useProductStore();
 const {
@@ -62,20 +61,16 @@ const sortAndSetProducts = (key) => {
   });
 };
 
-const sortByName = () => {
-  order = order === "asc" ? "desc" : "asc";
-  sortAndSetProducts("name");
+const createSortFunction = (field) => {
+  return () => {
+    order = order === "asc" ? "desc" : "asc";
+    sortAndSetProducts(field);
+  };
 };
 
-const sortByPrice = () => {
-  order = order === "asc" ? "desc" : "asc";
-  sortAndSetProducts("newPrice");
-};
-
-const sortyByRate = () => {
-  order = order === "asc" ? "desc" : "asc";
-  sortAndSetProducts("star");
-};
+const sortByName = createSortFunction("name");
+const sortByPrice = createSortFunction("newPrice");
+const sortyByRate = createSortFunction("star");
 
 // Sorted with icons
 const show = reactive({
@@ -95,7 +90,7 @@ const show = reactive({
         <li
           class="relative hover:underline hover:text-shadow-md hover:translate-x-[-15px] transition-transform transition-duration-300 ease-in-out"
         >
-          <a class="" href=""
+          <a class="" href="#"
             >Woman’s Fashion
             <span
               class="after:content-['>'] absolute top-0 right-[-70px]"
@@ -105,7 +100,7 @@ const show = reactive({
         <li
           class="relative hover:underline hover:text-shadow-md hover:translate-x-[-15px] transition-transform transition-duration-300 ease-in-out"
         >
-          <a href="" class=""
+          <a href="#" class=""
             >Men’s Fashion
             <span
               class="after:content-['>'] absolute top-0 right-[-70px] hover:underline hover:text-shadow-md hover:translate-x-[-15px] transition-transform transition-duration-300 ease-in-out"
@@ -115,37 +110,37 @@ const show = reactive({
         <li
           class="hover:underline hover:text-shadow-md hover:translate-x-[-15px] transition-transform transition-duration-500 ease-in-out"
         >
-          <a href="" class="">Electronics</a>
+          <a href="#" class="">Electronics</a>
         </li>
         <li
           class="hover:underline hover:text-shadow-md hover:translate-x-[-15px] transition-transform transition-duration-500 ease-in-out"
         >
-          <a href="" class="hover:">Home & Lifestyle</a>
+          <a href="#" class="hover:">Home & Lifestyle</a>
         </li>
         <li
           class="hover:underline hover:text-shadow-md hover:translate-x-[-15px] transition-transform transition-duration-500 ease-in-out"
         >
-          <a href="" class="hover:">Medicine</a>
+          <a href="#" class="hover:">Medicine</a>
         </li>
         <li
           class="hover:underline hover:text-shadow-md hover:translate-x-[-15px] transition-transform transition-duration-500 ease-in-out"
         >
-          <a href="" class="hover:">Sports & Outdoor</a>
+          <a href="#" class="hover:">Sports & Outdoor</a>
         </li>
         <li
           class="hover:underline hover:text-shadow-md hover:translate-x-[-15px] transition-transform transition-duration-500 ease-in-out"
         >
-          <a href="" class="">Baby’s & Toys</a>
+          <a href="#" class="">Baby’s & Toys</a>
         </li>
         <li
           class="hover:underline hover:text-shadow-md hover:translate-x-[-15px] transition-transform transition-duration-500 ease-in-out"
         >
-          <a href="" class="hover:">Groceries & Pets</a>
+          <a href="#" class="hover:">Groceries & Pets</a>
         </li>
         <li
           class="hover:underline hover:text-shadow-md hover:translate-x-[-15px] transition-transform transition-duration-500 ease-in-out"
         >
-          <a href="" class="hover:">Health & Beauty</a>
+          <a href="#" class="hover:">Health & Beauty</a>
         </li>
       </ul>
     </aside>

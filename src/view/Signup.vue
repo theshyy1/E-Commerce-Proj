@@ -1,6 +1,6 @@
 <script setup>
 import { RouterLink } from "vue-router";
-import { register } from "../services/http";
+import { registerAPI } from "../services/http";
 import { reactive } from "vue";
 import { useRouter } from "vue-router";
 import { toast } from "vue3-toastify";
@@ -20,7 +20,7 @@ const handleLogin = async () => {
   }
 
   try {
-    await register(userLogin);
+    await registerAPI(userLogin);
     toast.success("Đăng ký thành công, Đăng nhập ngay !!", {
       autoClose: 2000,
       theme: "colored",

@@ -46,14 +46,18 @@ const totalPriceItems = computed(() => {
 });
 
 const handleCheckout = async () => {
-  userState.user.cart = [];
-  payFee.value = 0;
-  await updateUserAPI(userState.user);
-  toast.success("Checkout successfully", {
-    autoClose: 1500,
-    position: "bottom-right",
-    theme: "colored",
-  });
+  if (!userState.user.cart.length > 0) return;
+  const confirm = window.confirm("Bạn có chắc muốn thanh toán không?");
+  if (confirm) {
+    userState.user.cart = [];
+    payFee.value = 0;
+    await updateUserAPI(userState.user);
+    toast.success("Checkout Done", {
+      autoClose: 1500,
+      position: "bottom-right",
+      theme: "colored",
+    });
+  }
 };
 </script>
 

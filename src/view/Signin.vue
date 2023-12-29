@@ -4,8 +4,7 @@ import { reactive } from "vue";
 import { RouterLink, useRouter } from "vue-router";
 import { toast } from "vue3-toastify";
 
-const router = useRouter();
-const { login } = useAuthStore();
+const authStore = useAuthStore();
 
 const user = reactive({
   email: "admin@gmail.com",
@@ -13,21 +12,12 @@ const user = reactive({
 });
 
 const handleLogin = async () => {
-  const res = await login(user);
-  if (res.user.role === "1") {
-    router.push({ path: "/admin" });
-  } else {
-    router.push({ path: "/" });
-  }
+  authStore.login(user);
   toast.success("Đăng nhập thành công !", {
-    autoClose: 2000,
+    autoClose: 1500,
     position: "top-center",
     theme: "colored",
   });
-  // try {
-  // } catch (error) {
-  //   console.log(error.response.data);
-  // }
 };
 </script>
 

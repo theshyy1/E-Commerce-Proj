@@ -1,5 +1,4 @@
 <script setup>
-import { ref } from "vue";
 import { useAuthStore } from "../store/auth";
 import { updateUserAPI } from "../services/http";
 import { toast } from "vue3-toastify";
@@ -73,7 +72,7 @@ const handleDelete = async (product) => {
       </h1>
       <button
         @click="moveAllToBag"
-        class="border-[1px] border-black py-3 px-7 rounded hover:bg-orange-400"
+        class="border-[1px] border-black py-3 px-7 hover:text-white hover:border-orange-500 rounded hover:bg-orange-400"
       >
         Move All To Bag
       </button>

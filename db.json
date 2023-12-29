@@ -49,6 +49,36 @@
       "soldQuantity": 28,
       "image": "https://picsum.photos/275/250",
       "quantityInStock": 47
+    },
+    {
+      "id": 6,
+      "name": "Mac M1",
+      "oldPrice": 1200,
+      "newPrice": 1099,
+      "star": 5,
+      "soldQuantity": 88,
+      "image": "https://picsum.photos/271/251",
+      "quantityInStock": 50
+    },
+    {
+      "id": 7,
+      "name": "Keyboard Profestional",
+      "oldPrice": 1160,
+      "newPrice": 960,
+      "star": 3,
+      "soldQuantity": 75,
+      "image": "https://picsum.photos/272/251",
+      "quantityInStock": 70
+    },
+    {
+      "id": 8,
+      "name": "Super Mouse",
+      "oldPrice": 404,
+      "newPrice": 379,
+      "star": 4,
+      "soldQuantity": 99,
+      "image": "https://picsum.photos/273/251",
+      "quantityInStock": 28
     }
   ],
   "users": [
@@ -79,18 +109,7 @@
       "image": "/src/assets/vuquynh.jpg",
       "id": 2,
       "role": "2",
-      "careItems": [
-        {
-          "id": 4,
-          "name": "S-Series Comfort Chair",
-          "oldPrice": 400,
-          "newPrice": 375,
-          "star": 3,
-          "soldQuantity": 88,
-          "image": "https://picsum.photos/274/250",
-          "quantityInStock": 58
-        }
-      ],
+      "careItems": [],
       "cart": []
     },
     {

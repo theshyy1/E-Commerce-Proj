@@ -50,9 +50,10 @@ export const useProductStore = defineStore("products", () => {
     }
   };
 
-  const getAllProducts = async () => {
-    const res = await getProducts2API();
-    allProducts.value = res.data;
+  const getAllProducts = () => {
+    getProducts2API().then(({ data }) => {
+      allProducts.value = data;
+    });
   };
 
   return {
