@@ -13,6 +13,7 @@ instance.interceptors.response.use(
   (error) => {
     if (error.response) {
       console.error("Server error:", error.response.data);
+      alert(error.response.data);
     } else if (error.request) {
       console.error("No response from server");
     } else {

@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 import { getAllUsersAPI, signinAPI } from "../services/http";
+import { toast } from "vue3-toastify";
 
 export const useAuthStore = defineStore("auth", () => {
   const router = useRouter();
@@ -28,6 +29,11 @@ export const useAuthStore = defineStore("auth", () => {
         } else {
           router.push({ path: "/" });
         }
+        toast.success("Đăng nhập thành công !", {
+          autoClose: 1500,
+          position: "top-center",
+          theme: "colored",
+        });
       }
     } catch (error) {
       console.error("Error Login:", error);
