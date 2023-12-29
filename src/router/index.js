@@ -14,6 +14,12 @@ const routes = [
         meta: { title: "Home" },
       },
       {
+        path: "products",
+        name: "Home Products",
+        component: () => import("../view/HomePage.vue"),
+        meta: { title: "Home" },
+      },
+      {
         path: "profile",
         name: "Profile",
         component: () => import("../view/Profile.vue"),

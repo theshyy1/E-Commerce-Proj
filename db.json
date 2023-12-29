@@ -162,6 +162,19 @@
       "password": "$2a$10$TtG8HErdyHu7e2qPv6tb4Ofsbcbx0ViNstYuhXNY4s4sNZG3mgRYG",
       "name": "Manh",
       "id": 6
+    },
+    {
+      "email": "trungv@gmail.com",
+      "password": "$2a$10$gfEobLtSqviR/20dGY6Oue7GO.hwuMvB/y0yfi0gxze0M222psd2a",
+      "name": "Trung",
+      "id": 7
+    },
+    {
+      "email": "trung@gmail.com",
+      "password": "$2a$10$YIQOfpALnqrcGnOv8L4U7O9819t2EUL1/GQ2OPgJhWXPF0AAg2HXC",
+      "name": "Hoang",
+      "repeat_password": "anhtrung",
+      "id": 8
     }
   ]
 }

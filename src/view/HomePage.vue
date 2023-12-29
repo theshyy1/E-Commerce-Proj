@@ -255,6 +255,13 @@ const show = reactive({
           </div>
         </article>
       </template>
+      <div class="">
+        <ul class="flex space-x-3">
+          <RouterLink to="/products?page=1">1</RouterLink>
+          <RouterLink to="/products?page=2">2</RouterLink>
+          <RouterLink to="/products?page=3">3</RouterLink>
+        </ul>
+      </div>
     </div>
     <div class="">
       <button

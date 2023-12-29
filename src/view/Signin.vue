@@ -1,23 +1,46 @@
 <script setup>
 import { useAuthStore } from "../store/auth";
-import { reactive } from "vue";
-import { RouterLink, useRouter } from "vue-router";
-import { toast } from "vue3-toastify";
+import { reactive, ref } from "vue";
+import { RouterLink } from "vue-router";
+import Joi from "joi";
+
+const userSchema = Joi.object({
+  email: Joi.string()
+    .email({
+      minDomainSegments: 2,
+      tlds: { allow: ["com", "net"] },
+    })
+    .min(10)
+    .max(25)
+    .required(),
+  password: Joi.string().required(),
+});
 
 const authStore = useAuthStore();
-
 const user = reactive({
   email: "admin@gmail.com",
   password: "anhtrung",
 });
 
+const errors = reactive({
+  email: null,
+  password: null,
+});
+
 const handleLogin = async () => {
-  authStore.login(user);
-  toast.success("Đăng nhập thành công !", {
-    autoClose: 1500,
-    position: "top-center",
-    theme: "colored",
-  });
+  const { error } = userSchema.validate(user);
+  if (error) {
+    Object.keys(errors).forEach((field) => (errors[field] = null));
+
+    error.details.forEach((detail) => {
+      const field = detail.path[0];
+      errors[field] = detail.message;
+    });
+
+    return;
+  } else {
+    authStore.login(user);
+  }
 };
 </script>
 
@@ -36,12 +59,22 @@ const handleLogin = async () => {
           class="block w-full outline-none border-b-[1px] border-neutral-400 py-3"
           v-model="user.email"
         />
+        <span
+          v-if="errors.email"
+          class="text-sm text-red-500 w-[300px] block bg-red-200 border-[1px] py-2 px-3"
+          >{{ errors.email }}</span
+        >
         <input
           type="password"
           placeholder="Password"
           class="block w-full outline-none border-b-[1px] border-neutral-400 py-3"
           v-model="user.password"
         />
+        <span
+          v-if="errors.password"
+          class="text-sm text-red-500 w-[300px] block bg-red-200 border-[1px] py-2 px-3"
+          >{{ errors.password }}</span
+        >
         <p class="my-4 text-neutral-600">
           Have you an account?
           <RouterLink to="/signup" class="underline">Register</RouterLink>
