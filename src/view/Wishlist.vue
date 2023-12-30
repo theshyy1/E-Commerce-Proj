@@ -12,9 +12,9 @@ const moveAllToBag = async () => {
     ...user.cart,
     ...user.careItems.map((item) => ({ ...item, quantity: 1 })),
   ];
-  const uniqueItems = new Set(allItemsCare.map((item) => item.id));
+  const uniqueItems = new Set(allItemsCare.map((item) => item._id));
   const myLastItems = [...uniqueItems].map((id) =>
-    allItemsCare.find((obj) => obj.id === id)
+    allItemsCare.find((obj) => obj._id === id)
   );
 
   const confirm = window.confirm(
@@ -33,7 +33,7 @@ const moveAllToBag = async () => {
 };
 
 const addToCart = async (product) => {
-  const index = user.cart.findIndex((item) => item.id == product.id);
+  const index = user.cart.findIndex((item) => item._id == product._id);
   if (index !== -1) {
     user.cart[index].quantity++;
   } else {
@@ -51,7 +51,7 @@ const addToCart = async (product) => {
 };
 
 const handleDelete = async (product) => {
-  const index = user.careItems.findIndex((item) => item.id === product.id);
+  const index = user.careItems.findIndex((item) => item._id === product._id);
   if (index !== -1) {
     user.careItems.splice(index, 1);
     await updateUserAPI(user);
@@ -78,9 +78,9 @@ const handleDelete = async (product) => {
       </button>
     </div>
     <div class="grid grid-cols-4 gap-4 my-[60px]">
-      <article v-for="product in user.careItems" :key="product.id">
+      <article v-for="(product, index) in user.careItems" :key="product._id">
         <div class="mb-4 relative">
-          <RouterLink :to="`/products/${product.id}`">
+          <RouterLink :to="`/products/${user.careItems[index]}`">
             <img :src="product.image" alt="" class="rounded" />
           </RouterLink>
           <p

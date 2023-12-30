@@ -13,13 +13,13 @@ const userSchema = Joi.object({
     .min(10)
     .max(25)
     .required(),
-  password: Joi.string().min(8).max(16).required(),
+  password: Joi.string().min(6).max(16).required(),
 });
 
 const authStore = useAuthStore();
 const user = reactive({
-  email: "kimlong@gmail.com",
-  password: "anhtrung",
+  email: "vuquynh@gmail.com",
+  password: "vuquynh",
 });
 
 const errors = reactive({

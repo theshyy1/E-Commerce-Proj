@@ -1,10 +1,9 @@
 <script setup>
 import { reactive } from "vue";
-import { useRouter } from "vue-router";
 import { toast } from "vue3-toastify";
-import "vue3-toastify/dist/index.css";
 import { useProductStore } from "../../store";
 import Joi from "joi";
+import { router } from "../../ultil";
 
 const productSchema = Joi.object({
   name: Joi.string().required(),
@@ -13,7 +12,6 @@ const productSchema = Joi.object({
   image: Joi.string().uri().required(),
 });
 
-const router = useRouter();
 const store = useProductStore();
 
 const newProduct = reactive({

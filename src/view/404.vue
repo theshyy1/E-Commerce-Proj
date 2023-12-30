@@ -1,8 +1,7 @@
 <script setup>
-import { useRouter } from "vue-router";
 import { useAuthStore } from "../store/auth";
+import { router } from "../ultil";
 
-const router = useRouter();
 const authStore = useAuthStore();
 
 const handleClickBack = () => {

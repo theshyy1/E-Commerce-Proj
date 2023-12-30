@@ -1,10 +1,9 @@
 <script setup>
 import { useProductStore } from "../../store";
 import { toast } from "vue3-toastify";
-import { useRouter } from "vue-router";
 import { computed, onMounted } from "vue";
+import { router } from "../../ultil";
 
-const router = useRouter();
 const store = useProductStore();
 
 onMounted(() => store.getAllProducts());
@@ -42,15 +41,15 @@ const handleDelete = async (id) => {
       <thead>
         <tr>
           <th class="py-2 px-4 border-b">#</th>
-          <th class="py-2 px-4 border-b">Tên</th>
-          <th class="py-2 px-4 border-b">Giá</th>
-          <th class="py-2 px-4 border-b">Số lượng</th>
-          <th class="py-2 px-4 border-b">Ảnh</th>
-          <th class="py-2 px-4 border-b">Thao tác</th>
+          <th class="py-2 px-4 border-b">Name</th>
+          <th class="py-2 px-4 border-b">Price ( $ )</th>
+          <th class="py-2 px-4 border-b">Quantity ( items )</th>
+          <th class="py-2 px-4 border-b">Avatar</th>
+          <th class="py-2 px-4 border-b"></th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(product, index) in products" :key="product.id">
+        <tr v-for="(product, index) in products" :key="product._id">
           <td class="py-3 px-4">{{ index + 1 }}</td>
           <td class="py-3 px-4">{{ product.name }}</td>
           <td class="py-3 px-4">{{ product.newPrice }}</td>
@@ -66,13 +65,13 @@ const handleDelete = async (id) => {
             <button
               class="bg-blue-500 text-white py-2 px-6 mb-2 hover:opacity-60 rounded mr-2"
             >
-              Edit
+              <i class="fa-solid fa-hand"></i> Update
             </button>
             <button
               class="bg-red-500 text-white py-2 px-6 mb-2 hover:opacity-60 rounded"
-              @click="handleDelete(product.id)"
+              @click="handleDelete(product._id)"
             >
-              Del
+              <i class="fa-solid fa-xmark"></i> Delete
             </button>
           </td>
         </tr>

@@ -1,9 +1,9 @@
 <script setup>
 import { useAuthStore } from "../store/auth";
 import { updateUserAPI } from "../services/http";
-import { useRouter } from "vue-router";
+import { toast } from "vue3-toastify";
+import { router } from "../ultil";
 
-const router = useRouter();
 const {
   userState: { user },
 } = useAuthStore();
@@ -11,10 +11,20 @@ const {
 const handleSave = async (event) => {
   event.preventDefault();
   await updateUserAPI(user);
-  if (user.role === "1") {
-    router.push({ path: "/admin/profile" });
+  if (user.admin === true) {
+    await router.push({ path: "/admin/profile" });
+    toast.success("Updated profile !!", {
+      autoClose: 1500,
+      position: "top-center",
+      theme: "colored",
+    });
   } else {
-    router.push({ path: "/profile" });
+    await router.push({ path: "/profile" });
+    toast.success("Updated profile !!", {
+      autoClose: 1500,
+      position: "top-center",
+      theme: "colored",
+    });
   }
 };
 </script>
@@ -93,7 +103,7 @@ const handleSave = async (event) => {
             <p>
               <input
                 type="date"
-                v-model="user.birthDay"
+                v-model="user.birthday"
                 placeholder="Thêm ngày sinh..."
                 class="px-3 py-1"
               />

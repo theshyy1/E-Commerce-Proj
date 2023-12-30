@@ -21,7 +21,7 @@ const handleLogout = () => {
         <h3 class="shadow-md italic my-4">{{ user.name }}</h3>
         <div class="">
           <img
-            :src="user.image"
+            :src="user.image || 'https://picsum.photos/150/150'"
             class="object-cover w-[100px] h-[100px] rounded-full"
             alt=""
           />

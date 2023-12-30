@@ -3,6 +3,7 @@ import { computed, ref } from "vue";
 import { useAuthStore } from "../store/auth";
 import { toast } from "vue3-toastify";
 import { updateUserAPI } from "../services/http";
+import { router } from "../ultil";
 
 const { userState } = useAuthStore();
 
@@ -52,6 +53,7 @@ const handleCheckout = async () => {
     userState.user.cart = [];
     payFee.value = 0;
     await updateUserAPI(userState.user);
+    await router.push({ path: "/" });
     toast.success("Checkout Done", {
       autoClose: 1500,
       position: "bottom-right",

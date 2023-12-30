@@ -134,7 +134,10 @@ const router = createRouter({
   routes,
   scrollBehavior: (to, from, savedPosition) => {
     if (savedPosition) {
-      return savedPosition;
+      return {
+        el: "#page",
+        top: 10,
+      };
     } else {
       return { top: 0 };
     }

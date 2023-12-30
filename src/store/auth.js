@@ -21,10 +21,14 @@ export const useAuthStore = defineStore("auth", () => {
     const data = res.data;
     try {
       if (data && data.accessToken && data.user) {
+        localStorage.setItem("access_token", data.accessToken);
+        localStorage.setItem("refresh_token", data.refreshToken);
+
         userState.token = data.accessToken;
         userState.user = data.user;
         userState.isLoggin = true;
-        if (data.user.role === "1") {
+
+        if (data.user.admin === true) {
           await router.push({ path: "/admin" });
         } else {
           await router.push({ path: "/" });

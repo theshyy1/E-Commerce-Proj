@@ -45,7 +45,9 @@ const handleDeleteUser = (id) => {
             alt=""
           />
           <article class="">
-            <h3 class="text-xl">{{ user.name }}</h3>
+            <h3 class="text-xl">
+              {{ user.name }}
+            </h3>
             <p class="text-sm my-2">
               <i class="fa-solid fa-envelope-open-text mr-2"></i
               >{{ user.email }}
@@ -55,26 +57,24 @@ const handleDeleteUser = (id) => {
         </section>
         <span
           class="relative text-xl p-2 cursor-pointer"
-          @click="handleShow(user.id)"
+          @click="handleShow(user._id)"
         >
           <i class="fa-solid fa-ellipsis-vertical"></i>
           <transition name="fade">
             <div
-              v-show="selectedUser === user.id"
+              v-show="selectedUser === user._id"
               class="absolute top-[40px] right-[0] w-[90px] shadow-sm text-sm border-[1px] bg-white flex flex-col"
             >
               <button
                 class="text-black hover:bg-orange-500 hover:text-white px-2 py-1"
               >
-                <i class="fa-solid fa-pen-nib"></i>
-                Update
+                <i class="fa-solid fa-hand"></i> Update
               </button>
               <button
                 class="text-black hover:bg-orange-500 hover:text-white px-2 py-1"
                 @click="handleDeleteUser(user.id)"
               >
-                <i class="fa-solid fa-delete-left"></i>
-                Delete
+                <i class="fa-solid fa-xmark"></i> Delete
               </button>
             </div>
           </transition>

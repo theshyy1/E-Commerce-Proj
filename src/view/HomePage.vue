@@ -4,7 +4,8 @@ import { useProductStore } from "../store";
 import { useAuthStore } from "../store/auth";
 import { updateUserAPI } from "../services/http";
 import { toast } from "vue3-toastify";
-import { RouterLink, useRoute } from "vue-router";
+import { RouterLink } from "vue-router";
+import { route } from "../ultil";
 
 const store = useProductStore();
 const {
@@ -17,7 +18,7 @@ const productFilters = computed(() => store.allProducts);
 // add to wishlist
 const handleClick = async (product) => {
   const index =
-    user && user?.careItems.findIndex((item) => item.id === product.id);
+    user && user?.careItems.findIndex((item) => item._id === product._id);
   if (index === -1) {
     user.careItems.unshift(product);
   }
@@ -47,7 +48,7 @@ const removeClick = async (product) => {
 
 // check item in wishlist
 const checkItem = (product) => {
-  return user?.careItems?.findIndex((item) => item.id === product.id) !== -1;
+  return user?.careItems?.findIndex((item) => item._id === product._id) !== -1;
 };
 
 // Sorted with options
@@ -82,7 +83,6 @@ const show = reactive({
 
 // Pagination
 const itemsPerPage = 4;
-const route = useRoute();
 
 const currentPage = computed(() => {
   const page = parseInt(route.query.page) || 1;
@@ -224,12 +224,12 @@ const totalPages = computed(() => {
         </button>
       </li>
     </ul>
-    <div class="grid grid-cols-4 gap-4">
+    <div class="#page grid grid-cols-4 gap-4">
       <span v-if="store.isLoading">Loading...</span>
       <template v-if="paginatedProducts">
         <article v-for="product in paginatedProducts" :key="product.id">
           <div class="relative mb-4">
-            <RouterLink :to="`/products/${product.id}`">
+            <RouterLink :to="`/products/${product._id}`">
               <img
                 :src="product.image"
                 :alt="product.name"

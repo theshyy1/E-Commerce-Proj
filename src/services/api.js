@@ -1,44 +1,53 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "http://localhost:3000/",
-  timeout: 4000,
-  headers: {
-    "Content-Type": "application/json",
-  },
+  baseURL: "http://localhost:8000/v1/",
+  withCredentials: true,
 });
 
 instance.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    if (error.response) {
-      console.error("Server error:", error.response.data);
-      alert(error.response.data);
-    } else if (error.request) {
-      console.error("No response from server");
-    } else {
-      console.error("Request setup error:", error.message);
+  (response) => {
+    return response;
+  },
+  async (error) => {
+    const originalRequest = error.config;
+    // console.log("Access token expired");
+    if (error.response && error.response.status === 401) {
+      try {
+        // console.log("Restart fresh token");
+        const response = await instance.post(
+          "http://localhost:8000/v1/auth/refresh"
+        );
+
+        const { accessToken } = response.data;
+        localStorage.setItem("access_token", accessToken);
+
+        originalRequest.headers["Authorization"] = `Bearer ${accessToken}`;
+        return instance(originalRequest);
+      } catch (error) {
+        console.log("Error Happened", error);
+        return Promise.reject(error);
+      }
     }
     return Promise.reject(error);
   }
 );
 
 instance.interceptors.request.use(
-  (response) => response,
-  (error) => {
-    if (error.response) {
-      console.error(
-        "Server error:",
-        error.response.status,
-        error.response.data
-      );
-    } else if (error.request) {
-      console.error("No response from server");
-    } else {
-      console.error("Request setup error:", error.message);
+  (config) => {
+    const accessToken = localStorage.getItem("access_token");
+    if (accessToken) {
+      config.headers.Authorization = `Bearer ${accessToken}`;
     }
+    return config;
+  },
+  (error) => {
     return Promise.reject(error);
   }
 );
 
 export default instance;
+
+// {
+// refresh_token: localStorage.getItem("refresh_token"),
+// }

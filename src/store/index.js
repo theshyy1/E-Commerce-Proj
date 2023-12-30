@@ -5,8 +5,8 @@ import {
   deleteProductAPI,
   addProductAPI,
   getProductAPI,
+  getProductsAPI,
 } from "../services/http";
-import axios from "axios";
 
 export const useProductStore = defineStore("products", () => {
   const allProducts = ref([]);
@@ -15,7 +15,7 @@ export const useProductStore = defineStore("products", () => {
   const getFilteredProducts = async (text = "") => {
     if (text.trim) {
       isLoading.value = true;
-      const res = await axios.get(`http://localhost:3000/products?q=${text}`);
+      const res = await getProductsAPI();
       const data = await res.data;
       allProducts.value = data;
       isLoading.value = false;
@@ -23,6 +23,7 @@ export const useProductStore = defineStore("products", () => {
       try {
         isLoading.value = true;
         getProductAPI().then((data) => {
+          console.log(data);
           allProducts.value = data;
           isLoading.value = false;
         });

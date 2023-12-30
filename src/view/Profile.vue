@@ -7,15 +7,18 @@ const {
   userState: { user },
 } = useAuthStore();
 
+console.log(user);
+
 const birthday = computed(() =>
-  user.birthDay ? user.birthDay.split("-") : ["01", "01", "2000"]
+  user.birthday ? user.birthday.split("-") : ["01", "01", "2000"]
 );
 
 const hidePhoneNumber = computed(() => {
   const newNumber = ref("");
 
   if (user.phone) {
-    newNumber.value = user.phone.slice(0, -4).padEnd(user.phone.length, "*");
+    newNumber.value =
+      user.phone.slice(0, -4).padEnd(user.phone.length, "*") || 0;
   }
   return newNumber.value;
 });
@@ -39,7 +42,7 @@ const hidePhoneNumber = computed(() => {
       >
       <div class="">
         <img
-          :src="user?.image || 'https://picsum.photos/200/200'"
+          :src="user.image || 'https://picsum.photos/200/200'"
           class="rounded-full w-[200px] h-[200px] object-cover"
           alt=""
         />

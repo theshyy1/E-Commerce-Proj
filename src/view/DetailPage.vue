@@ -1,9 +1,8 @@
 <script setup>
-import { useRoute } from "vue-router";
 import { getProductAPI } from "../services/http";
 import { onMounted, ref } from "vue";
+import { route } from "../ultil";
 
-const route = useRoute();
 const currentProduct = ref(null);
 
 onMounted(() => {

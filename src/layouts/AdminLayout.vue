@@ -1,5 +1,5 @@
 <script setup>
-import { RouterLink, RouterView } from "vue-router";
+import { RouterView } from "vue-router";
 import Sidebar from "../components/Sidebar.vue";
 import AdHeader from "../components/AdHeader.vue";
 </script>

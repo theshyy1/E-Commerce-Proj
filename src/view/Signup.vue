@@ -2,9 +2,9 @@
 import { RouterLink } from "vue-router";
 import { registerAPI } from "../services/http";
 import { reactive } from "vue";
-import { useRouter } from "vue-router";
 import { toast } from "vue3-toastify";
 import Joi from "joi";
+import { router } from "../ultil";
 
 const userSchema = Joi.object({
   name: Joi.string().required(),
@@ -20,7 +20,6 @@ const userSchema = Joi.object({
   confirm_password: Joi.ref("password"),
 });
 
-const router = useRouter();
 const userLogin = reactive({
   name: "",
   email: "",
