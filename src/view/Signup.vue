@@ -4,7 +4,9 @@ import { registerAPI } from "../services/http";
 import { reactive } from "vue";
 import { toast } from "vue3-toastify";
 import Joi from "joi";
-import { router } from "../ultil";
+
+import { useRouter } from "vue-router";
+const router = useRouter();
 
 const userSchema = Joi.object({
   name: Joi.string().required(),

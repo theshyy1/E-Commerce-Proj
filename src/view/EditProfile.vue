@@ -2,7 +2,9 @@
 import { useAuthStore } from "../store/auth";
 import { updateUserAPI } from "../services/http";
 import { toast } from "vue3-toastify";
-import { router } from "../ultil";
+
+import { useRouter } from "vue-router";
+const router = useRouter();
 
 const {
   userState: { user },
