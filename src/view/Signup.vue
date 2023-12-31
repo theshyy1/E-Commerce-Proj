@@ -3,24 +3,9 @@ import { RouterLink } from "vue-router";
 import { registerAPI } from "../services/http";
 import { reactive } from "vue";
 import { toast } from "vue3-toastify";
-import Joi from "joi";
-
 import { useRouter } from "vue-router";
+import { signUpSchema } from "../ultil/schema";
 const router = useRouter();
-
-const userSchema = Joi.object({
-  name: Joi.string().required(),
-  email: Joi.string()
-    .email({
-      minDomainSegments: 2,
-      tlds: { allow: ["com", "net"] },
-    })
-    .min(10)
-    .max(25)
-    .required(),
-  password: Joi.string().min(8).max(16).required(),
-  confirm_password: Joi.ref("password"),
-});
 
 const userLogin = reactive({
   name: "",
@@ -37,7 +22,7 @@ const errors = reactive({
 });
 
 const handleLogin = async () => {
-  const { error } = userSchema.validate(userLogin);
+  const { error } = signUpSchema.validate(userLogin);
   if (error) {
     Object.keys(errors).forEach((field) => (errors[field] = null));
 

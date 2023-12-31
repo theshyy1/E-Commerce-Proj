@@ -2,7 +2,6 @@
 import { useAuthStore } from "../store/auth";
 import { updateUserAPI } from "../services/http";
 import { toast } from "vue3-toastify";
-
 import { useRouter } from "vue-router";
 const router = useRouter();
 
@@ -15,7 +14,7 @@ const handleSave = async (event) => {
   await updateUserAPI(user);
   if (user.admin === true) {
     await router.push({ path: "/admin/profile" });
-    toast.success("Updated profile !!", {
+    toast.success("Updated profile!!", {
       autoClose: 1500,
       position: "top-center",
       theme: "colored",

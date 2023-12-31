@@ -1,7 +1,6 @@
 <script setup>
 import { getProductAPI } from "../services/http";
 import { onMounted, ref } from "vue";
-
 import { useRoute } from "vue-router";
 const route = useRoute();
 

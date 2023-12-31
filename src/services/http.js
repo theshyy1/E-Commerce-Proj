@@ -1,6 +1,12 @@
 import instance from "./api";
 
-export const getProductsAPI = () => instance.get("/products");
+export const getProductsAPI = (page, limit) =>
+  instance.get("/products", {
+    params: {
+      page: page,
+      limit: limit,
+    },
+  });
 
 export const getProducts2API = () => instance.get("/products");
 

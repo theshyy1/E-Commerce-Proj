@@ -2,24 +2,12 @@
 import { useAuthStore } from "../store/auth";
 import { reactive, ref } from "vue";
 import { RouterLink } from "vue-router";
-import Joi from "joi";
-
-const userSchema = Joi.object({
-  email: Joi.string()
-    .email({
-      minDomainSegments: 2,
-      tlds: { allow: ["com", "net"] },
-    })
-    .min(10)
-    .max(25)
-    .required(),
-  password: Joi.string().min(6).max(16).required(),
-});
+import { signInSchema } from "../ultil/schema";
 
 const authStore = useAuthStore();
 const user = reactive({
-  email: "vuquynh@gmail.com",
-  password: "vuquynh",
+  email: "anhtrung@gmail.com",
+  password: "anhtrung",
 });
 
 const errors = reactive({
@@ -28,7 +16,7 @@ const errors = reactive({
 });
 
 const handleLogin = async () => {
-  const { error } = userSchema.validate(user);
+  const { error } = signInSchema.validate(user);
   if (error) {
     Object.keys(errors).forEach((field) => (errors[field] = null));
 

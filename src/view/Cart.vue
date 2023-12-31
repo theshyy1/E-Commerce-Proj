@@ -43,7 +43,7 @@ function getPriceDiscount() {
 // Total price items
 const totalPriceItems = computed(() => {
   const total = user.cart.reduce(
-    (total, num) => total + num.quantity * num.newPrice,
+    (total, num) => (total + num.quantity ? num.quantity : 1 * num.newPrice),
     0
   );
   return total;
@@ -51,7 +51,7 @@ const totalPriceItems = computed(() => {
 
 // Handle quantity
 const handleDecrease = async (product) => {
-  const index = user.cart.findIndex((item) => item.id == product.id);
+  const index = user.cart.findIndex((item) => item._id == product._id);
 
   if (user.cart[index].quantity > 1) {
     user.cart[index].quantity--;
@@ -78,7 +78,7 @@ const handleDecrease = async (product) => {
 };
 
 const handleIncrease = async (product) => {
-  const index = user.cart.findIndex((item) => item.id == product.id);
+  const index = user.cart.findIndex((item) => item._id == product._id);
   user.cart[index].quantity++;
   await updateUserAPI(user);
   toast.success("Added +1", {
@@ -114,7 +114,7 @@ const removeItem = async (product) => {
     <div class="">
       <ul
         v-for="cart in user.cart"
-        :key="cart.id"
+        :key="cart._id"
         class="relative border-[1px] shadow-md border-neutral-400 grid grid-cols-4 justify-between text-center items-center py-3 my-[30px]"
       >
         <li class="flex items-center justify-center">
@@ -130,7 +130,7 @@ const removeItem = async (product) => {
           <div
             class="flex justify-center items-center rounded py-2 px-3 w-[80px] border-[1px] mx-auto border-neutral-300"
           >
-            <p class="mr-2">{{ cart.quantity }}</p>
+            <p class="mr-2">{{ cart.quantity || 1 }}</p>
             <div class="flex flex-col ml-1 items-center justify-start">
               <i
                 class="fa-solid fa-chevron-up cursor-pointer"
@@ -143,7 +143,7 @@ const removeItem = async (product) => {
             </div>
           </div>
         </li>
-        <li>${{ cart.quantity * cart.newPrice }}</li>
+        <li>${{ cart.quantity || 1 * cart.newPrice }}</li>
         <span
           class="absolute top-[35px] right-[30px] text-base text-red-500 hover:text-red-300 cursor-pointer"
           @click="removeItem(cart)"

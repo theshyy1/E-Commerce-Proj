@@ -31,9 +31,8 @@ const moveAllToBag = async () => {
     theme: "colored",
   });
 };
-
 const addToCart = async (product) => {
-  const index = user.cart.findIndex((item) => item._id == product._id);
+  const index = user.cart.findIndex((item) => item._id === product._id);
   if (index !== -1) {
     user.cart[index].quantity++;
   } else {
@@ -80,7 +79,7 @@ const handleDelete = async (product) => {
     <div class="grid grid-cols-4 gap-4 my-[60px]">
       <article v-for="(product, index) in user.careItems" :key="product._id">
         <div class="mb-4 relative">
-          <RouterLink :to="`/products/${user.careItems[index]}`">
+          <RouterLink :to="`/products/${product._id}`">
             <img :src="product.image" alt="" class="rounded" />
           </RouterLink>
           <p

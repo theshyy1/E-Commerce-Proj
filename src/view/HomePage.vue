@@ -1,20 +1,37 @@
 <script setup>
-import { computed, onMounted, reactive, ref } from "vue";
+import { computed, onMounted, reactive, ref, watch } from "vue";
 import { useProductStore } from "../store";
 import { useAuthStore } from "../store/auth";
 import { updateUserAPI } from "../services/http";
 import { toast } from "vue3-toastify";
 import { RouterLink } from "vue-router";
-import { useRoute } from "vue-router";
-
+import { useRoute, useRouter } from "vue-router";
 const route = useRoute();
-const store = useProductStore();
+const router = useRouter();
+
 const {
   userState: { user },
 } = useAuthStore();
+const store = useProductStore();
 
-onMounted(() => store.getFilteredProducts());
-const productFilters = computed(() => store.allProducts);
+// Pagination
+const currentPage = computed(() => {
+  const page = parseInt(route.query.page) || 1;
+  return page;
+});
+
+onMounted(() => store.getFilteredProducts(currentPage.value, 4));
+watch(currentPage, (newPage) => {
+  store.getFilteredProducts(newPage, 4);
+  router.push({ query: { page: newPage } });
+});
+
+const productFilters = computed(() => ({
+  products: store.allProducts.products,
+  totalPages: store.allProducts.totalPages,
+  currentPage: store.allProducts.currentPage,
+  allProducts2: store.allProducts.allProducts2,
+}));
 
 // add to wishlist
 const handleClick = async (product) => {
@@ -55,8 +72,8 @@ const checkItem = (product) => {
 // Sorted with options
 let order = "asc";
 const sortAndSetProducts = (key) => {
-  const newProducts = ref(productFilters.value);
-  productFilters.value = newProducts.value.sort((a, b) => {
+  const newProducts = ref(productFilters.value.allProducts2);
+  productFilters.value.products = newProducts.value.sort((a, b) => {
     const order1 = order === "asc" ? 1 : -1;
     const comp =
       key === "name" ? a[key].localeCompare(b[key]) : a[key] - b[key];
@@ -80,24 +97,6 @@ const show = reactive({
   name: true,
   price: true,
   star: false,
-});
-
-// Pagination
-const itemsPerPage = 4;
-
-const currentPage = computed(() => {
-  const page = parseInt(route.query.page) || 1;
-  return page;
-});
-
-const paginatedProducts = computed(() => {
-  const startIndex = (currentPage.value - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  return productFilters.value.slice(startIndex, endIndex);
-});
-
-const totalPages = computed(() => {
-  return Math.ceil(productFilters.value.length / itemsPerPage);
 });
 </script>
 
@@ -227,8 +226,8 @@ const totalPages = computed(() => {
     </ul>
     <div class="#page grid grid-cols-4 gap-4">
       <span v-if="store.isLoading">Loading...</span>
-      <template v-if="paginatedProducts">
-        <article v-for="product in paginatedProducts" :key="product.id">
+      <template v-if="productFilters">
+        <article v-for="product in productFilters.products" :key="product.id">
           <div class="relative mb-4">
             <RouterLink :to="`/products/${product._id}`">
               <img
@@ -276,23 +275,22 @@ const totalPages = computed(() => {
           </div>
         </article>
       </template>
-
-      <div class="mt-4">
-        <!-- Hiển thị phân trang -->
-        <nav class="flex justify-center">
-          <ul class="flex">
-            <li v-for="page in totalPages" :key="page">
-              <router-link
-                :to="`/products?page=${page}`"
-                class="px-3 py-1 rounded border border-gray-300 mr-2"
-                :class="currentPage === page ? 'bg-gray-300' : ''"
-              >
-                {{ page }}
-              </router-link>
-            </li>
-          </ul>
-        </nav>
-      </div>
+    </div>
+    <!-- Hiển thị phân trang -->
+    <div class="mt-4">
+      <nav class="flex justify-end">
+        <ul class="flex">
+          <li v-for="page in productFilters.totalPages" :key="page">
+            <router-link
+              :to="`/products?page=${page}`"
+              class="px-3 py-1 rounded border border-gray-300 mr-2"
+              :class="productFilters.currentPage === page ? 'bg-gray-300' : ''"
+            >
+              {{ page }}
+            </router-link>
+          </li>
+        </ul>
+      </nav>
     </div>
     <div class="">
       <button

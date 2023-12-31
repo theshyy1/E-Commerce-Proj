@@ -4,7 +4,6 @@ import {
   getProducts2API,
   deleteProductAPI,
   addProductAPI,
-  getProductAPI,
   getProductsAPI,
 } from "../services/http";
 
@@ -12,25 +11,12 @@ export const useProductStore = defineStore("products", () => {
   const allProducts = ref([]);
   const isLoading = ref(false);
 
-  const getFilteredProducts = async (text = "") => {
-    if (text.trim) {
-      isLoading.value = true;
-      const res = await getProductsAPI();
-      const data = await res.data;
-      allProducts.value = data;
-      isLoading.value = false;
-    } else {
-      try {
-        isLoading.value = true;
-        getProductAPI().then((data) => {
-          console.log(data);
-          allProducts.value = data;
-          isLoading.value = false;
-        });
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    }
+  const getFilteredProducts = async (page = 1, limit) => {
+    isLoading.value = true;
+    const res = await getProductsAPI(page, limit);
+    const data = await res.data;
+    allProducts.value = data;
+    isLoading.value = false;
   };
 
   const deleteProduct = async (id) => {

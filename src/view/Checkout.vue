@@ -3,7 +3,6 @@ import { computed, ref } from "vue";
 import { useAuthStore } from "../store/auth";
 import { toast } from "vue3-toastify";
 import { updateUserAPI } from "../services/http";
-
 import { useRouter } from "vue-router";
 const router = useRouter();
 
@@ -42,7 +41,7 @@ function getPriceDiscount() {
 
 const totalPriceItems = computed(() => {
   const total = userState.user.cart.reduce(
-    (total, num) => total + num.quantity * num.newPrice,
+    (total, num) => total + num.quantity || 1 * num.newPrice,
     0
   );
   return total;
@@ -141,7 +140,7 @@ const handleCheckout = async () => {
                   />
                   <p class="text-sm w-[180px]">{{ item.name }}</p>
                 </div>
-                <span>x{{ item.quantity }}</span>
+                <span>x{{ item.quantity || 1 }}</span>
                 <span class="text-red-500 text-sm">${{ item.newPrice }}</span>
               </RouterLink>
             </li>
