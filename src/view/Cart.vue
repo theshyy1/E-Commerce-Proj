@@ -43,7 +43,7 @@ function getPriceDiscount() {
 // Total price items
 const totalPriceItems = computed(() => {
   const total = user.cart.reduce(
-    (total, num) => (total + num.quantity ? num.quantity : 1 * num.newPrice),
+    (total, num) => total + (num.quantity ? num.quantity : 1) * num.newPrice,
     0
   );
   return total;
@@ -143,7 +143,7 @@ const removeItem = async (product) => {
             </div>
           </div>
         </li>
-        <li>${{ cart.quantity || 1 * cart.newPrice }}</li>
+        <li>${{ (cart.quantity || 1) * cart.newPrice }}</li>
         <span
           class="absolute top-[35px] right-[30px] text-base text-red-500 hover:text-red-300 cursor-pointer"
           @click="removeItem(cart)"

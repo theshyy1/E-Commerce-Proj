@@ -47,7 +47,3 @@ instance.interceptors.request.use(
 );
 
 export default instance;
-
-// {
-// refresh_token: localStorage.getItem("refresh_token"),
-// }

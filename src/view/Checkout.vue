@@ -41,7 +41,7 @@ function getPriceDiscount() {
 
 const totalPriceItems = computed(() => {
   const total = userState.user.cart.reduce(
-    (total, num) => total + num.quantity || 1 * num.newPrice,
+    (total, num) => total + (num.quantity ? num.quantity : 1) * num.newPrice,
     0
   );
   return total;

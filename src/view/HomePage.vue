@@ -15,14 +15,15 @@ const {
 const store = useProductStore();
 
 // Pagination
+const limit = 4;
 const currentPage = computed(() => {
   const page = parseInt(route.query.page) || 1;
   return page;
 });
 
-onMounted(() => store.getFilteredProducts(currentPage.value, 4));
+onMounted(() => store.getFilteredProducts(currentPage.value, limit));
 watch(currentPage, (newPage) => {
-  store.getFilteredProducts(newPage, 4);
+  store.getFilteredProducts(newPage, limit);
   router.push({ query: { page: newPage } });
 });
 
@@ -66,7 +67,9 @@ const removeClick = async (product) => {
 
 // check item in wishlist
 const checkItem = (product) => {
-  return user?.careItems?.findIndex((item) => item._id === product._id) !== -1;
+  return (
+    user && user.careItems.findIndex((item) => item._id === product._id) !== -1
+  );
 };
 
 // Sorted with options

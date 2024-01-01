@@ -5,7 +5,7 @@ const routes = [
   {
     path: "/",
     name: "BaseLayout",
-    component: () => import("../layouts/BaseLayout.vue"),
+    component: () => import("../layouts/BaseLayout.vue"), //lazy loading route
     children: [
       {
         path: "/",
@@ -44,19 +44,19 @@ const routes = [
         meta: { title: "About" },
       },
       {
-        path: "/wishlist",
+        path: "wishlist",
         name: "Wishlist",
         component: () => import("../view/Wishlist.vue"),
         meta: { title: "Wishlist" },
       },
       {
-        path: "/cart",
+        path: "cart",
         name: "Cart",
         component: () => import("../view/Cart.vue"),
         meta: { title: "My Cart" },
       },
       {
-        path: "/checkout",
+        path: "checkout",
         name: "Checkout",
         component: () => import("../view/Checkout.vue"),
         meta: { title: "Checkout" },

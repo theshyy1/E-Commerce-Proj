@@ -22,7 +22,6 @@ export const useAuthStore = defineStore("auth", () => {
     try {
       if (data && data.accessToken && data.user) {
         localStorage.setItem("access_token", data.accessToken);
-        localStorage.setItem("refresh_token", data.refreshToken);
 
         userState.token = data.accessToken;
         userState.user = data.user;
