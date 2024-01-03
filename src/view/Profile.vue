@@ -7,8 +7,6 @@ const {
   userState: { user },
 } = useAuthStore();
 
-console.log(user);
-
 const birthday = computed(() =>
   user.birthday ? user.birthday.split("-") : ["01", "01", "2000"]
 );
