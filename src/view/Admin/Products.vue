@@ -2,13 +2,16 @@
 import { useProductStore } from "../../store";
 import { toast } from "vue3-toastify";
 import { computed, onMounted } from "vue";
-import { router } from "../../ultil";
+import { useRouter } from "vue-router";
+import { deleteProductAPI } from "../../services/http";
 
+const router = useRouter();
 const store = useProductStore();
 
 onMounted(() => store.getAllProducts());
 
 const products = computed(() => store.allProducts);
+
 const handleDelete = async (id) => {
   const confirm = window.confirm("Are you sure to delete this product?");
   if (confirm) {

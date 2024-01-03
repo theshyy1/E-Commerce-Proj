@@ -3,10 +3,17 @@ import { useAuthStore } from "../store/auth";
 import { useRouter } from "vue-router";
 const router = useRouter();
 
-const authStore = useAuthStore();
+const {
+  userState: { isLoggin, user },
+} = useAuthStore();
 
 const handleClickBack = () => {
-  if (authStore.userState.user.role === "1") {
+  if (!isLoggin) {
+    router.push({ path: "/" });
+    return;
+  }
+
+  if (user.admin === true) {
     router.push({ path: "/admin/dashboard" });
   } else {
     router.push({ path: "/" });

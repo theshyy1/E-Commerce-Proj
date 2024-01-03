@@ -3,20 +3,22 @@ import { reactive } from "vue";
 import { toast } from "vue3-toastify";
 import { useProductStore } from "../../store";
 import Joi from "joi";
-import { router } from "../../ultil";
+import { useRouter } from "vue-router";
+import { addProductAPI } from "../../services/http";
 
 const productSchema = Joi.object({
   name: Joi.string().required(),
-  newPrice: Joi.number().min(0).required(),
+  price: Joi.number().min(0).required(),
   quantityInStock: Joi.number().min(0).required(),
   image: Joi.string().uri().required(),
 });
 
+const router = useRouter();
 const store = useProductStore();
 
 const newProduct = reactive({
   name: "",
-  newPrice: 0,
+  price: 0,
   quantityInStock: 0,
   image: "",
 });
@@ -35,11 +37,8 @@ const handleSubmit = async () => {
 
     const product = {
       ...value,
-      star: 3,
-      soldQuantity: 0,
-      oldPrice: (value.newPrice * 110) / 100,
     };
-    await store.addProduct(product);
+    await addProductAPI(product);
     await router.push({ path: "/admin/products", replace: true });
     toast.success("Added successfully", {
       autoClose: 1500,
@@ -70,7 +69,7 @@ const handleSubmit = async () => {
         <input
           type="text"
           placeholder="..."
-          v-model="newProduct.newPrice"
+          v-model="newProduct.price"
           class="py-2 px-3 bg-neutral-300 w-[400px] mt-2 shadow-md"
         />
       </div>

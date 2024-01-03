@@ -18,7 +18,8 @@ export const updateUserAPI = (user) => instance.put(`/users/${user._id}`, user);
 
 export const getProductAPI = (id) => instance.get(`/products/${id}`);
 
-export const addProductAPI = (product) => instance.post("/products", product);
+export const addProductAPI = (product) =>
+  instance.post("products/create", product);
 
 export const deleteProductAPI = (id) => instance.delete(`/products/${id}`);
 

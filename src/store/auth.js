@@ -48,7 +48,7 @@ export const useAuthStore = defineStore("auth", () => {
     userState.user = null;
     userState.token = null;
 
-    router.push({ path: "/signin" });
+    router.push({ path: "/" });
   };
 
   const getUsers = () => {

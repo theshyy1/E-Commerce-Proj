@@ -2,6 +2,7 @@
 import { useAuthStore } from "../store/auth";
 import { updateUserAPI } from "../services/http";
 import { toast } from "vue3-toastify";
+import { getNewestPrice } from "../ultil";
 
 const {
   userState: { user },
@@ -20,6 +21,7 @@ const moveAllToBag = async () => {
   const confirm = window.confirm(
     "Bạn có chắc chắn muốn thêm tất vào giỏ hàng không?"
   );
+
   if (!confirm) return;
   user.cart = myLastItems;
   user.careItems = [];
@@ -77,20 +79,24 @@ const handleDelete = async (product) => {
       </button>
     </div>
     <div class="grid grid-cols-4 gap-4 my-[60px]">
-      <article v-for="(product, index) in user.careItems" :key="product._id">
+      <article
+        v-for="(product, index) in user.careItems"
+        :key="product._id"
+        class="shadow-md py-4 px-4"
+      >
         <div class="mb-4 relative">
           <RouterLink :to="`/products/${product._id}`">
             <img :src="product.image" alt="" class="rounded" />
           </RouterLink>
           <p
-            class="flex justify-center items-center absolute top-4 right-[50px] w-[30px] h-[30px] bg-white rounded-full hover:opacity-70 cursor-pointer"
+            class="flex justify-center items-center absolute top-4 right-[35px] w-[30px] h-[30px] bg-white rounded-full hover:opacity-70 cursor-pointer"
             @click="handleDelete(product)"
           >
             <i class="fa-solid fa-trash-can text-xl"></i>
           </p>
           <span
             @click="addToCart(product)"
-            class="absolute w-[88%] text-center h-[41px] leading-[41px] text-sm cursor-pointer top-[90%] left-0 bg-black text-white"
+            class="absolute w-[98%] text-center h-[41px] leading-[41px] text-sm cursor-pointer top-[84%] left-0 bg-black text-white"
             ><i class="fa-solid fa-cart-shopping"></i> Add to cart</span
           >
         </div>
@@ -99,9 +105,9 @@ const handleDelete = async (product) => {
             <h5 class="text-base hover:underline">{{ product.name }}</h5>
           </RouterLink>
           <p class="text-red-600 mr-2 my-2">
-            $ {{ product.newPrice }}
+            $ {{ getNewestPrice(product.price) }}
             <span class="text-neutral-400 line-through"
-              >$ {{ product.oldPrice }}</span
+              >$ {{ product.price }}</span
             >
           </p>
         </div>

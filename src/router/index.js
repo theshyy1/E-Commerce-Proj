@@ -1,5 +1,6 @@
 import { createWebHistory, createRouter } from "vue-router";
 import { useAuthStore } from "../store/auth";
+import Swal from "sweetalert2";
 
 const routes = [
   {
@@ -146,19 +147,53 @@ const router = createRouter({
 
 router.beforeEach(async (to, from, next) => {
   const authStore = useAuthStore();
+
   if (!authStore.userState.isLoggin) {
-    if (to.name === "Signin" || to.name === "Signup") {
-      next();
+    if (
+      to.name === "Profile" ||
+      to.name === "Checkout" ||
+      to.name === "Cart" ||
+      to.name === "Wishlist" ||
+      to.name === "Dashboard" ||
+      to.name === "Products"
+    ) {
+      try {
+        const result = await Swal.fire({
+          title: "Yêu cầu đăng nhập",
+          text: "Bạn cần đăng nhập để truy cập trang này",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Đăng nhập",
+          cancelButtonText: "Hủy bỏ",
+        });
+        if (result.isConfirmed) {
+          next({ name: "Signin" });
+        } else {
+          next({ name: from.name });
+        }
+      } catch (error) {
+        next(false);
+      }
     } else {
-      next({ name: "Signin" });
+      next();
     }
   } else {
-    if (to.name === "Signup" || to.name === "Signin") {
-      next({ name: from.name });
-    } else {
-      next();
-    }
+    next();
   }
 });
 
 export default router;
+
+// if (!authStore.userState.isLoggin) {
+//   if (to.name === "Signin" || to.name === "Signup") {
+//     next();
+//   } else {
+//     next({ name: "Signin" });
+//   }
+// } else {
+//   if (to.name === "Signup" || to.name === "Signin") {
+//     next({ name: from.name });
+//   } else {
+//     next();
+//   }
+// }

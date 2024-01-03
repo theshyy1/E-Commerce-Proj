@@ -6,6 +6,8 @@ import { updateUserAPI } from "../services/http";
 import { toast } from "vue3-toastify";
 import { RouterLink } from "vue-router";
 import { useRoute, useRouter } from "vue-router";
+import Swal from "sweetalert2";
+
 const route = useRoute();
 const router = useRouter();
 
@@ -31,7 +33,7 @@ const productFilters = computed(() => ({
   products: store.allProducts.products,
   totalPages: store.allProducts.totalPages,
   currentPage: store.allProducts.currentPage,
-  allProducts2: store.allProducts.allProducts2,
+  allProducts: store.allProducts.allProducts,
 }));
 
 // add to wishlist
@@ -42,17 +44,31 @@ const handleClick = async (product) => {
     user.careItems.unshift(product);
   }
 
-  await updateUserAPI(user);
-  toast.success("Added x1", {
-    autoClose: 1500,
-    position: "bottom-right",
-    theme: "colored",
-  });
+  if (!user) {
+    const result = await Swal.fire({
+      title: "Yêu cầu đăng nhập",
+      text: "Bạn cần đăng nhập để thêm sản phẩm",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Đăng nhập",
+      cancelButtonText: "Hủy bỏ",
+    });
+    if (result.isConfirmed) {
+      router.push({ path: "Signin" });
+    }
+  } else {
+    await updateUserAPI(user);
+    toast.success("Added x1", {
+      autoClose: 1500,
+      position: "bottom-right",
+      theme: "colored",
+    });
+  }
 };
 
 // remove from wishlist
 const removeClick = async (product) => {
-  const index = user.careItems.findIndex((item) => item.id === product.id);
+  const index = user.careItems.findIndex((item) => item._id === product._id);
   if (index !== -1) {
     user.careItems.splice(index, 1);
   }
@@ -75,7 +91,7 @@ const checkItem = (product) => {
 // Sorted with options
 let order = "asc";
 const sortAndSetProducts = (key) => {
-  const newProducts = ref(productFilters.value.allProducts2);
+  const newProducts = ref(productFilters.value.allProducts);
   productFilters.value.products = newProducts.value.sort((a, b) => {
     const order1 = order === "asc" ? 1 : -1;
     const comp =
@@ -92,7 +108,7 @@ const createSortFunction = (field) => {
 };
 
 const sortByName = createSortFunction("name");
-const sortByPrice = createSortFunction("newPrice");
+const sortByPrice = createSortFunction("price");
 const sortyByRate = createSortFunction("star");
 
 // Sorted with icons
@@ -230,7 +246,11 @@ const show = reactive({
     <div class="#page grid grid-cols-4 gap-4">
       <span v-if="store.isLoading">Loading...</span>
       <template v-if="productFilters">
-        <article v-for="product in productFilters.products" :key="product.id">
+        <article
+          v-for="product in productFilters.products"
+          :key="product.id"
+          class="shadow-md py-4 px-2"
+        >
           <div class="relative mb-4">
             <RouterLink :to="`/products/${product._id}`">
               <img
@@ -240,7 +260,7 @@ const show = reactive({
               />
             </RouterLink>
             <p
-              class="flex justify-center items-center absolute top-4 right-[50px] w-[36px] h-[36px] bg-white rounded-full hover:opacity-70 cursor-pointer"
+              class="flex justify-center items-center absolute top-4 right-[35px] w-[36px] h-[36px] bg-white rounded-full hover:opacity-70 cursor-pointer"
             >
               <i
                 class="fa-solid fa-heart text-2xl text-orange-500"
@@ -258,10 +278,10 @@ const show = reactive({
             <RouterLink :to="`/products/${product.id}`">
               <h5 class="text-base hover:underline">{{ product.name }}</h5>
             </RouterLink>
-            <p class="text-red-600 mr-2 my-2">
-              ${{ product.newPrice }}
-              <span class="text-neutral-400 line-through"
-                >${{ product.oldPrice }}</span
+            <p class="text-red-600 my-2">
+              ${{ product.price * 0.85 }}
+              <span class="text-neutral-400 line-through ml-2"
+                >${{ product.price }}</span
               >
             </p>
             <ul>

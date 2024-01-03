@@ -3,8 +3,7 @@
     {
       "id": 1,
       "name": "HAVIT HV-G92 Gamepad",
-      "oldPrice": 160,
-      "newPrice": 120,
+      "price": 120,
       "star": 4,
       "soldQuantity": 88,
       "image": "https://picsum.photos/271/250",
@@ -13,8 +12,7 @@
     {
       "id": 2,
       "name": "AK-900 Wired Keyboard",
-      "oldPrice": 1160,
-      "newPrice": 960,
+      "price": 960,
       "star": 5,
       "soldQuantity": 75,
       "image": "https://picsum.photos/272/250",
@@ -23,8 +21,7 @@
     {
       "id": 3,
       "name": "IPS LCD Gaming Monitor",
-      "oldPrice": 400,
-      "newPrice": 370,
+      "price": 370,
       "star": 4,
       "soldQuantity": 99,
       "image": "https://picsum.photos/273/250",
@@ -33,8 +30,7 @@
     {
       "id": 4,
       "name": "S-Series Comfort Chair",
-      "oldPrice": 400,
-      "newPrice": 375,
+      "price": 375,
       "star": 3,
       "soldQuantity": 88,
       "image": "https://picsum.photos/274/250",
@@ -43,8 +39,7 @@
     {
       "id": 5,
       "name": "S-Series Comfort Chair 1",
-      "oldPrice": 333,
-      "newPrice": 300,
+      "price": 300,
       "star": 2,
       "soldQuantity": 28,
       "image": "https://picsum.photos/275/250",
@@ -53,8 +48,7 @@
     {
       "id": 6,
       "name": "Mac M1",
-      "oldPrice": 1200,
-      "newPrice": 1099,
+      "price": 1099,
       "star": 5,
       "soldQuantity": 88,
       "image": "https://picsum.photos/271/251",
@@ -63,8 +57,7 @@
     {
       "id": 7,
       "name": "Keyboard Profestional",
-      "oldPrice": 1160,
-      "newPrice": 960,
+      "price": 960,
       "star": 3,
       "soldQuantity": 75,
       "image": "https://picsum.photos/272/251",
@@ -73,8 +66,7 @@
     {
       "id": 8,
       "name": "Super Mouse",
-      "oldPrice": 404,
-      "newPrice": 379,
+      "price": 379,
       "star": 4,
       "soldQuantity": 99,
       "image": "https://picsum.photos/273/251",
@@ -109,18 +101,7 @@
       "image": "/src/assets/vuquynh.jpg",
       "id": 2,
       "role": "2",
-      "careItems": [
-        {
-          "id": 2,
-          "name": "AK-900 Wired Keyboard",
-          "oldPrice": 1160,
-          "newPrice": 960,
-          "star": 5,
-          "soldQuantity": 75,
-          "image": "https://picsum.photos/272/250",
-          "quantityInStock": 50
-        }
-      ],
+      "careItems": [],
       "cart": [
         {
           "id": 2,

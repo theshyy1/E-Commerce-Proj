@@ -1,14 +1,25 @@
 <script setup>
 import { RouterLink } from "vue-router";
 import { useAuthStore } from "../store/auth";
+import Swal from "sweetalert2";
 
 const {
   userState: { user },
   logout,
 } = useAuthStore();
 
-const handleLogout = () => {
-  logout();
+const handleLogout = async () => {
+  const result = await Swal.fire({
+    // title: "Yêu cầu đăng nhập",
+    text: "Bạn có chắc chắn muốn đăng xuất không?",
+    icon: "question",
+    showCancelButton: true,
+    confirmButtonText: "Có",
+    cancelButtonText: "Không",
+  });
+  if (result.isConfirmed) {
+    logout();
+  }
 };
 </script>
 
@@ -69,11 +80,11 @@ const handleLogout = () => {
       >
     </li>
     <li @click="handleLogout">
-      <RouterLink
-        class="py-5 px-5 border-b-[1px] border-gray-200 hover:bg-orange-500 block"
-        to="/admin/setting"
-        ><i class="fa-solid fa-right-from-bracket mr-3"></i>Logout</RouterLink
+      <p
+        class="py-5 px-5 border-b-[1px] cursor-pointer border-gray-200 hover:bg-orange-500 block"
       >
+        <i class="fa-solid fa-right-from-bracket mr-3"></i>Logout
+      </p>
     </li>
   </ul>
 </template>

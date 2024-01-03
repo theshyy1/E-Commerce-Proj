@@ -4,6 +4,7 @@ import { useAuthStore } from "../store/auth";
 import { updateUserAPI } from "../services/http";
 import { toast } from "vue3-toastify";
 import { RouterLink } from "vue-router";
+import { getNewestPrice } from "../ultil";
 
 const {
   userState: { user },
@@ -11,7 +12,7 @@ const {
 
 // Discount price
 const codeDiscount = ref("");
-const shipPrice = ref(user.cart.length * 20);
+const shipPrice = ref(user.cart.length > 0 ? user.cart.length * 20 : 0);
 const payFee = ref(shipPrice.value);
 
 const getDiscount = computed(() => {
@@ -43,7 +44,8 @@ function getPriceDiscount() {
 // Total price items
 const totalPriceItems = computed(() => {
   const total = user.cart.reduce(
-    (total, num) => total + (num.quantity ? num.quantity : 1) * num.newPrice,
+    (total, num) =>
+      total + (num.quantity ? num.quantity : 1) * getNewestPrice(num.price),
     0
   );
   return total;
@@ -125,7 +127,7 @@ const removeItem = async (product) => {
           />
           {{ cart.name }}
         </li>
-        <li>${{ cart.newPrice }}</li>
+        <li>${{ getNewestPrice(cart.price) }}</li>
         <li>
           <div
             class="flex justify-center items-center rounded py-2 px-3 w-[80px] border-[1px] mx-auto border-neutral-300"
@@ -143,7 +145,7 @@ const removeItem = async (product) => {
             </div>
           </div>
         </li>
-        <li>${{ (cart.quantity || 1) * cart.newPrice }}</li>
+        <li>${{ (cart.quantity || 1) * getNewestPrice(cart.price) }}</li>
         <span
           class="absolute top-[35px] right-[30px] text-base text-red-500 hover:text-red-300 cursor-pointer"
           @click="removeItem(cart)"

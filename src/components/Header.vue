@@ -3,6 +3,7 @@ import { RouterLink } from "vue-router";
 import { ref } from "vue";
 import { useProductStore } from "../store";
 import { useAuthStore } from "../store/auth";
+import Swal from "sweetalert2";
 
 const productStore = useProductStore();
 const { userState, logout } = useAuthStore();
@@ -13,8 +14,18 @@ const handleSubmit = () => {
   searchText.value = "";
 };
 
-const handleLogout = () => {
-  logout();
+const handleLogout = async () => {
+  const result = await Swal.fire({
+    // title: "Yêu cầu đăng nhập",
+    text: "Bạn có chắc chắn muốn đăng xuất không?",
+    icon: "question",
+    showCancelButton: true,
+    confirmButtonText: "Có",
+    cancelButtonText: "Không",
+  });
+  if (result.isConfirmed) {
+    logout();
+  }
 };
 </script>
 
